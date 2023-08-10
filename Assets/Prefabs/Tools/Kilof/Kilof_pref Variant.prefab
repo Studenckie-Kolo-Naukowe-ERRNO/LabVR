@@ -61,22 +61,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
@@ -106,12 +106,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_Name
-      value: Kilof_pref Variant
+      value: Kilof_pref
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
@@ -145,7 +145,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!136 &185623692
@@ -303,11 +303,11 @@ MonoBehaviour:
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
   m_SmoothPosition: 1
-  m_SmoothPositionAmount: 10
+  m_SmoothPositionAmount: 20
   m_TightenPosition: 0.5
   m_TrackRotation: 1
   m_SmoothRotation: 1
-  m_SmoothRotationAmount: 10
+  m_SmoothRotationAmount: 20
   m_TightenRotation: 0.5
   m_ThrowOnDetach: 1
   m_ThrowSmoothingDuration: 0.25
