@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(AudioSource))]
 public class ButtonVR : MonoBehaviour
 {
     [SerializeField] private GameObject buttonBody;
-    [SerializeField] private AudioClip clickSound;
     [SerializeField] private float treshold = 0.1f;
     [SerializeField] private float deadZone = 0.025f;
     [SerializeField] private float delay = 0.5f;
@@ -23,14 +21,12 @@ public class ButtonVR : MonoBehaviour
     private Vector3 startPos;
     private ConfigurableJoint joint;
     private bool toogled = true;
-    private AudioSource audioSource;
     private float pressTime = 0;
 
     void Start()
     {
         startPos = buttonBody.transform.localPosition;
         joint = buttonBody.GetComponent<ConfigurableJoint>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -57,7 +53,7 @@ public class ButtonVR : MonoBehaviour
 
     private void Pressed()
     {
-        OnClick();
+        pressTime = Time.time + delay;
         pressed = true;
         onPressed.Invoke();
 
@@ -68,14 +64,8 @@ public class ButtonVR : MonoBehaviour
     }
     private void Released()
     {
-        OnClick();
+        pressTime = Time.time + delay;
         pressed = false;
         onReleased.Invoke();
-    }
-
-    private void OnClick()
-    {
-        audioSource.PlayOneShot(clickSound);
-        pressTime = Time.time + delay;
     }
 }
