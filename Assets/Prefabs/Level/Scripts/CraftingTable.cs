@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CraftingTable : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class CraftingTable : MonoBehaviour
     [Header("Crafting")]
     [SerializeField] private List<CraftingRecipe> craftings = new List<CraftingRecipe>();
     [SerializeField] private Transform resultPos;
+    [SerializeField] private UnityEvent onSuccessfulCraft;
+    [SerializeField] private UnityEvent onUnsuccessfulCraft;
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<Item>(out Item i))
@@ -79,10 +82,11 @@ public class CraftingTable : MonoBehaviour
             {
                 Instantiate(craftings[i].CraftThisRecipe(ref items),
                     resultPos.position, resultPos.rotation,null);
-                break;
+                onSuccessfulCraft.Invoke();
+                return;
             }
         }
-
+        onUnsuccessfulCraft.Invoke();
     }
 }
 
