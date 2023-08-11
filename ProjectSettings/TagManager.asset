@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Colliders
+  - Tools
+  - ToolsInUse
+  - PlayerHands
   - 
   - 
   - 
