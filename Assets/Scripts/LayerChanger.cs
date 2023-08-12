@@ -10,4 +10,8 @@ public class LayerChanger : MonoBehaviour
     {
         transform.gameObject.layer = LayerMask.NameToLayer(a? layerMaskA: layerMaskB);
     }
+    public static void SetObjectLayer(GameObject g, string layer)
+    {
+        g.layer = LayerMask.NameToLayer(layer);
+    }
 }

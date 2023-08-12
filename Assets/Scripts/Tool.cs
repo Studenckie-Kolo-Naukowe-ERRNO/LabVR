@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 public class Tool : XRGrabInteractable
 {
+    [Header("Tool")]
     [SerializeField] private string layerMaskA = "Tools";
     [SerializeField] private string layerMaskB = "ToolsInUse";
+
+    [Header("Toggle")]
+    [SerializeField] private UnityEvent OnToggle;
+    [SerializeField] private UnityEvent OnUnToggle;
+    private bool toggled = false;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         ChangeLayer(true);
+        
+
         base.OnSelectEntered(args);
     }
 
@@ -19,16 +28,12 @@ public class Tool : XRGrabInteractable
         base.OnSelectExited(args);  
     }
 
-    protected override void OnSelectEntered(XRBaseInteractor interactor)
+    protected override void OnActivated(ActivateEventArgs args)
     {
-        ChangeLayer(true);
-        base.OnSelectEntered(interactor);  
-    }
-
-    protected override void OnSelectExited(XRBaseInteractor interactor)
-    {
-        ChangeLayer(false);
-        base.OnSelectExited(interactor);
+        if (toggled) OnUnToggle.Invoke();
+        else OnToggle.Invoke();
+        toggled = !toggled;
+        base.OnActivated(args);
     }
 
     public void ChangeLayer(bool a)
