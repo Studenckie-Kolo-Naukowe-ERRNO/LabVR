@@ -6,25 +6,29 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Tool : XRGrabInteractable
 {
     [Header("Tool")]
-    [SerializeField] private string layerMaskA = "Tools";
-    [SerializeField] private string layerMaskB = "ToolsInUse";
+    [SerializeField] protected string layerMaskA = "Tools";
+    [SerializeField] protected string layerMaskB = "ToolsInUse";
 
-    [Header("Toggle")]
-    [SerializeField] private UnityEvent OnToggle;
-    [SerializeField] private UnityEvent OnUnToggle;
-    private bool toggled = false;
+    [Header("Events")]
+    [SerializeField] protected UnityEvent OnToggle;
+    [SerializeField] protected UnityEvent OnUnToggle;
+    [SerializeField] protected UnityEvent InHand;
 
+    protected bool toggled = false;
+    protected byte inHands = 0;
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        ChangeLayer(true);
-        
+        LayerChanger.SetObjectLayer(this.gameObject, layerMaskA);
+        inHands++;
 
         base.OnSelectEntered(args);
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
-        ChangeLayer(false);
+        LayerChanger.SetObjectLayer(this.gameObject, layerMaskB);
+        inHands--;
+
         base.OnSelectExited(args);  
     }
 
@@ -36,9 +40,17 @@ public class Tool : XRGrabInteractable
         base.OnActivated(args);
     }
 
-    public void ChangeLayer(bool a)
+    private void Start()
     {
-        transform.gameObject.layer = LayerMask.NameToLayer(a ? layerMaskA : layerMaskB);
+        LayerChanger.SetObjectLayer(this.gameObject, layerMaskA);
+    }
+
+    private void Update()
+    {
+        if (inHands>0)
+        {
+            InHand.Invoke();
+        }
     }
 
 }
