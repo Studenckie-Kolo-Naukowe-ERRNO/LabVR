@@ -18,17 +18,19 @@ public class Tool : XRGrabInteractable
     protected byte inHands = 0;
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        LayerChanger.SetObjectLayer(this.gameObject, layerMaskA);
-        inHands++;
+        inHands++; 
+        LayerChanger.SetObjectLayer(this.gameObject, layerMaskB);
 
         base.OnSelectEntered(args);
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
-        LayerChanger.SetObjectLayer(this.gameObject, layerMaskB);
         inHands--;
-
+        if(inHands == 0)
+        {
+            LayerChanger.SetObjectLayer(this.gameObject, layerMaskA);
+        }
         base.OnSelectExited(args);  
     }
 
