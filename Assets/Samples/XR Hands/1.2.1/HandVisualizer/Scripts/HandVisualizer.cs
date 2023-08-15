@@ -19,10 +19,16 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
         [SerializeField]
         [Tooltip("References either a prefab or a GameObject in the scene that will be used to visualize the left hand.")]
         GameObject m_LeftHandMesh;
+        [SerializeField]
+        [Tooltip("Reference to controller")]
+        GameObject m_LeftHandController;
 
         [SerializeField]
         [Tooltip("References either a prefab or a GameObject in the scene that will be used to visualize the right hand.")]
         GameObject m_RightHandMesh;
+        [SerializeField]
+        [Tooltip("Reference to controller")]
+        GameObject m_RightHandController;
 
         [SerializeField]
         [Tooltip("(Optional) If this is set, the hand meshes will be assigned this material.")]
@@ -82,8 +88,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             if (m_Subsystem == null)
                 return;
 
-            UpdateRenderingVisibility(m_LeftHandGameObjects, m_Subsystem.leftHand.isTracked);
-            UpdateRenderingVisibility(m_RightHandGameObjects, m_Subsystem.rightHand.isTracked);
+            UpdateRenderingVisibility(m_LeftHandGameObjects, m_LeftHandController, m_Subsystem.leftHand.isTracked);
+            UpdateRenderingVisibility(m_RightHandGameObjects, m_RightHandController, m_Subsystem.rightHand.isTracked);
         }
 
         protected void OnDisable()
@@ -96,8 +102,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
                 m_Subsystem = null;
             }
 
-            UpdateRenderingVisibility(m_LeftHandGameObjects, false);
-            UpdateRenderingVisibility(m_RightHandGameObjects, false);
+            UpdateRenderingVisibility(m_LeftHandGameObjects, m_LeftHandController, false);
+            UpdateRenderingVisibility(m_RightHandGameObjects, m_RightHandController, false);
         }
 
         protected void OnDestroy()
@@ -159,8 +165,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
                     m_VelocityPrefab);
             }
 
-            UpdateRenderingVisibility(m_LeftHandGameObjects, m_Subsystem.leftHand.isTracked);
-            UpdateRenderingVisibility(m_RightHandGameObjects, m_Subsystem.rightHand.isTracked);
+            UpdateRenderingVisibility(m_LeftHandGameObjects,m_LeftHandController ,m_Subsystem.leftHand.isTracked);
+            UpdateRenderingVisibility(m_RightHandGameObjects,m_RightHandController, m_Subsystem.rightHand.isTracked);
 
             m_PreviousDrawMeshes = m_DrawMeshes;
             m_PreviousDebugDrawJoints = m_DebugDrawJoints;
@@ -189,7 +195,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             m_Subsystem.updatedHands -= OnUpdatedHands;
         }
 
-        void UpdateRenderingVisibility(HandGameObjects handGameObjects, bool isTracked)
+        void UpdateRenderingVisibility(HandGameObjects handGameObjects, GameObject controllerGameObject, bool isTracked)
         {
             if (handGameObjects == null)
                 return;
@@ -197,6 +203,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             handGameObjects.ToggleDrawMesh(m_DrawMeshes);
             handGameObjects.ToggleDebugDrawJoints(m_DebugDrawJoints && isTracked);
             handGameObjects.SetVelocityType(isTracked ? m_VelocityType : VelocityType.None);
+
+            controllerGameObject.SetActive(!isTracked);
         }
 
         void OnTrackingAcquired(XRHand hand)
@@ -204,11 +212,11 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             switch (hand.handedness)
             {
                 case Handedness.Left:
-                    UpdateRenderingVisibility(m_LeftHandGameObjects, true);
+                    UpdateRenderingVisibility(m_LeftHandGameObjects, m_LeftHandController, true);
                     break;
 
                 case Handedness.Right:
-                    UpdateRenderingVisibility(m_RightHandGameObjects, true);
+                    UpdateRenderingVisibility(m_RightHandGameObjects, m_RightHandController, true);
                     break;
             }
         }
@@ -218,11 +226,11 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             switch (hand.handedness)
             {
                 case Handedness.Left:
-                    UpdateRenderingVisibility(m_LeftHandGameObjects, false);
+                    UpdateRenderingVisibility(m_LeftHandGameObjects, m_LeftHandController, false);
                     break;
 
                 case Handedness.Right:
-                    UpdateRenderingVisibility(m_RightHandGameObjects, false);
+                    UpdateRenderingVisibility(m_RightHandGameObjects, m_RightHandController, false);
                     break;
             }
         }

@@ -36,7 +36,8 @@ public class HandPresence : MonoBehaviour
         yield return new WaitForSeconds(delay);
         foreach (Collider col in colliders)
         {
-            col.enabled = newState;
+            //col.enabled = newState;
+            col.gameObject.layer = LayerMask.NameToLayer(newState ? "PlayerHands" : "IgnoreTools");
         }
     }
 }
