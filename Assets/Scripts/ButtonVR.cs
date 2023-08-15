@@ -68,4 +68,9 @@ public class ButtonVR : MonoBehaviour
         pressed = false;
         onReleased.Invoke();
     }
+    [ContextMenu("Click")]
+    public void DebugClick()
+    {
+        Pressed();
+    }
 }
