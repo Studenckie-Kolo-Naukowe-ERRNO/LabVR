@@ -11,7 +11,7 @@ public class CraftingTable : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameOutput;
     [SerializeField] private TextMeshProUGUI descOutput;
 
-    private List<Item> items = new List<Item>();
+    private List<IItem> items = new List<IItem>();
     [SerializeField] private float writeSpeed = 0.1f;
 
     private IEnumerator writtingProcess;
@@ -23,7 +23,7 @@ public class CraftingTable : MonoBehaviour
     [SerializeField] private UnityEvent onUnsuccessfulCraft;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<Item>(out Item i))
+        if(other.TryGetComponent<IItem>(out IItem i))
         {
             items.Add(i);
 
@@ -35,7 +35,7 @@ public class CraftingTable : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<Item>(out Item i))
+        if (other.TryGetComponent<IItem>(out IItem i))
         {
             items.Remove(i);
             if (writtingProcess != null) StopCoroutine(writtingProcess);
@@ -53,23 +53,27 @@ public class CraftingTable : MonoBehaviour
         }
     }
 
-    IEnumerator WriteOutItemData(Item item)
+    IEnumerator WriteOutItemData(IItem item)
     {
-        nameOutput.SetText("");
-        descOutput.SetText("");
-
-        string itemName = item.GetItemData().GetItemName();
-        string itemData = item.GetItemData().GetItemDesc();
-
-        for(int i = 0; i < itemName.Length; i++)
+        ItemData dataOfItem = item.GetItemData();
+        if (dataOfItem != null)
         {
-            nameOutput.text += itemName[i];
-            yield return new WaitForSeconds(writeSpeed);
-        }
-        for (int i = 0; i < itemData.Length; i++)
-        {
-            descOutput.text += itemData[i];
-            yield return new WaitForSeconds(writeSpeed);
+            nameOutput.SetText("");
+            descOutput.SetText("");
+
+            string itemName = dataOfItem.GetItemName();
+            string itemData = dataOfItem.GetItemDesc();
+
+            for (int i = 0; i < itemName.Length; i++)
+            {
+                nameOutput.text += itemName[i];
+                yield return new WaitForSeconds(writeSpeed);
+            }
+            for (int i = 0; i < itemData.Length; i++)
+            {
+                descOutput.text += itemData[i];
+                yield return new WaitForSeconds(writeSpeed);
+            }
         }
     }
 
@@ -96,7 +100,7 @@ public class CraftingElement
     [SerializeField] private ItemData item;
     [SerializeField] private int amout;
 
-    public bool CanAfford(ref List<Item> itemsList)
+    public bool CanAfford(ref List<IItem> itemsList)
     {
         int c = 0;
         for(int i = 0;i< itemsList.Count(); i++)
@@ -106,14 +110,14 @@ public class CraftingElement
 
         return c>=amout;
     }
-    public void RemoveItemsFromList(ref List<Item> itemsList)
+    public void RemoveItemsFromList(ref List<IItem> itemsList)
     {
         //przegl¹danie listy od koñca!
         for (int i = itemsList.Count()-1, c = amout; i >=0  && c>0; i--)
         {
             if (itemsList[i].GetItemData() == item) 
             {
-                GameObject.Destroy(itemsList[i].gameObject);
+                GameObject.Destroy(itemsList[i].ThisObject());
                 itemsList.RemoveAt(i);
                 c--;
             }

@@ -111,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
       propertyPath: m_Name
-      value: Kilof_pref
+      value: Kilof_pref Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 01d48dff271b20a4c86e2112337e08e5,
         type: 3}
@@ -175,7 +175,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.45, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &185623691
+--- !u!114 &1756455047383623736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4491143371300291278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: affda64b30b045145bd9797125446096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -218,34 +218,10 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 185623698}
-        m_TargetAssemblyTypeName: LayerChanger, Assembly-CSharp
-        m_MethodName: ChangeLayer
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_LastSelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 185623698}
-        m_TargetAssemblyTypeName: LayerChanger, Assembly-CSharp
-        m_MethodName: ChangeLayer
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -290,7 +266,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 174416292}
   m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
+  m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1
@@ -304,11 +280,11 @@ MonoBehaviour:
   m_TrackPosition: 1
   m_SmoothPosition: 1
   m_SmoothPositionAmount: 20
-  m_TightenPosition: 0.5
+  m_TightenPosition: 0.25
   m_TrackRotation: 1
   m_SmoothRotation: 1
   m_SmoothRotationAmount: 20
-  m_TightenRotation: 0.5
+  m_TightenRotation: 0.25
   m_ThrowOnDetach: 1
   m_ThrowSmoothingDuration: 0.25
   m_ThrowSmoothingCurve:
@@ -334,30 +310,13 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &185623698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4491143371300291278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2d83c08d3d82c4d96808b1e59ec39d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMaskA: Tools
-  layerMaskB: ToolsInUse
---- !u!114 &3943676927034393643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4491143371300291278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f11746a568f024aa6ce19812cfbcc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 414c7ef6cf63064449abb1b2a2b84667, type: 2}
+  OnToggle:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnToggle:
+    m_PersistentCalls:
+      m_Calls: []
+  InHand:
+    m_PersistentCalls:
+      m_Calls: []

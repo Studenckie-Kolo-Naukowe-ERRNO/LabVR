@@ -97,6 +97,6 @@ public class Lightsaber : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.AddExplosionForce(cutForce, piece.transform.position, 1);
 
-        LayerChanger.SetObjectLayer(piece, "Sliceable");
+        piece.layer = LayerMask.NameToLayer("Sliceable");
     }
 }

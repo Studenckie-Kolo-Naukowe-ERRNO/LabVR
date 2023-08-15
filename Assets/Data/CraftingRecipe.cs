@@ -9,7 +9,7 @@ public class CraftingRecipe : ScriptableObject
     [SerializeField] private GameObject result;
     [SerializeField] private List<CraftingElement> ingredients = new List<CraftingElement>();
 
-    public bool CanAffordForCraft(ref List<Item> itemsList)
+    public bool CanAffordForCraft(ref List<IItem> itemsList)
     {
         for (int i = 0; i < ingredients.Count; i++)
         {
@@ -18,7 +18,7 @@ public class CraftingRecipe : ScriptableObject
         return true;
     }
 
-    public GameObject CraftThisRecipe(ref List<Item> itemsList)
+    public GameObject CraftThisRecipe(ref List<IItem> itemsList)
     {
         for (int i = 0; i < ingredients.Count; i++)
         {
