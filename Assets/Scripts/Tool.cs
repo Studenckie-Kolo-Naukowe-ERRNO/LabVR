@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
-public class Tool : XRGrabInteractable
+public class Tool : XRGrabInteractable, IItem
 {
-    [Header("Tool")]
-    [SerializeField] protected string layerMaskA = "Tools";
-    [SerializeField] protected string layerMaskB = "ToolsInUse";
-
+    [Header("Item")]
+    [SerializeField] private ItemData data;
     [Header("Events")]
     [SerializeField] protected UnityEvent OnToggle;
     [SerializeField] protected UnityEvent OnUnToggle;
@@ -18,17 +16,14 @@ public class Tool : XRGrabInteractable
     protected byte inHands = 0;
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        LayerChanger.SetObjectLayer(this.gameObject, layerMaskA);
-        inHands++;
+        inHands++; 
 
         base.OnSelectEntered(args);
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
-        LayerChanger.SetObjectLayer(this.gameObject, layerMaskB);
         inHands--;
-
         base.OnSelectExited(args);  
     }
 
@@ -40,17 +35,26 @@ public class Tool : XRGrabInteractable
         base.OnActivated(args);
     }
 
-    private void Start()
-    {
-        LayerChanger.SetObjectLayer(this.gameObject, layerMaskA);
-    }
-
     private void Update()
     {
-        if (inHands>0)
+        if (IsHolded())
         {
             InHand.Invoke();
         }
     }
 
+    public ItemData GetItemData()
+    {
+        return data;
+    }
+
+    public GameObject ThisObject()
+    {
+        return this.gameObject;
+    }
+
+    public bool IsHolded()
+    {
+        return inHands > 0;
+    }
 }

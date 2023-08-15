@@ -9,6 +9,6 @@ public class PunchingBag : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 collisionForce = collision.impulse / Time.fixedDeltaTime;
-        output.SetText(collisionForce.magnitude.ToString());
+        if (collisionForce.magnitude > 0)  output.SetText(collisionForce.magnitude.ToString());
     }
 }
