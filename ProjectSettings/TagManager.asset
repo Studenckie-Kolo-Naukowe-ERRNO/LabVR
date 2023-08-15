@@ -14,9 +14,9 @@ TagManager:
   - Player
   - Colliders
   - Tools
-  - ToolsInUse
+  - IgnoreTools
   - PlayerHands
-  - 
+  - Sliceable
   - 
   - 
   - 
