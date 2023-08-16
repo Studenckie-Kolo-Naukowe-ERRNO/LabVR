@@ -9,6 +9,8 @@ public class SolarSystemController : MonoBehaviour
     [SerializeField] private float speedScale = 100;
     [SerializeField] private ParticleSystem asteroids;
     [SerializeField] private Planet[] planets;
+
+    private const int CHANGE_SPEED_MULTIPLIER = 200;
     private void Start()
     {
         asteroids.transform.localScale = new Vector3(distanceScale, distanceScale, distanceScale);
@@ -25,6 +27,11 @@ public class SolarSystemController : MonoBehaviour
             float angle = (speedScale * Time.deltaTime) / (planets[i].revolutionPeriod / 365.25f);
             planets[i].planetObject.transform.RotateAround(transform.position, transform.up, angle);
         }
+    }
+
+    public void ChangeSpeed(float newValue)
+    {
+        speedScale = newValue * CHANGE_SPEED_MULTIPLIER;
     }
 }
 
