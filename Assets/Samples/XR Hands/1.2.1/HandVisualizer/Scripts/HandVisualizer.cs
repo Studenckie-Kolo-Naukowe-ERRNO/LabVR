@@ -204,6 +204,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             handGameObjects.ToggleDebugDrawJoints(m_DebugDrawJoints && isTracked);
             handGameObjects.SetVelocityType(isTracked ? m_VelocityType : VelocityType.None);
 
+            if (controllerGameObject == null)
+                return;
             controllerGameObject.SetActive(!isTracked);
         }
 

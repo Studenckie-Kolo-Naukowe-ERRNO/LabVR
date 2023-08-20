@@ -12,11 +12,28 @@ public class Tool : XRGrabInteractable, IItem
     [SerializeField] protected UnityEvent OnUnToggle;
     [SerializeField] protected UnityEvent InHand;
 
+    private Rigidbody rb;
+
     protected bool toggled = false;
     protected byte inHands = 0;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+    private void Update()
+    {
+        if (IsHolded())
+        {
+            InHand.Invoke();
+        }
+    }
+
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        inHands++; 
+        inHands++;
+        if (rb != null) rb.centerOfMass = Vector3.zero;
+
 
         base.OnSelectEntered(args);
     }
@@ -24,6 +41,8 @@ public class Tool : XRGrabInteractable, IItem
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         inHands--;
+        if (rb != null)rb.ResetCenterOfMass();
+
         base.OnSelectExited(args);  
     }
 
@@ -34,15 +53,6 @@ public class Tool : XRGrabInteractable, IItem
         toggled = !toggled;
         base.OnActivated(args);
     }
-
-    private void Update()
-    {
-        if (IsHolded())
-        {
-            InHand.Invoke();
-        }
-    }
-
     public ItemData GetItemData()
     {
         return data;

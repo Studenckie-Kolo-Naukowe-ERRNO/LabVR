@@ -15,6 +15,7 @@ public class KinematicBall : MonoBehaviour
     private void Start()
     {
         thisMaterial = gameObject.GetComponent<Renderer>().material;
+        SetMode(0);
     }
 
     public void SetMode(KinematicBallMode newMode)
@@ -24,7 +25,6 @@ public class KinematicBall : MonoBehaviour
         pointEmmiter.SetActive(mode == KinematicBallMode.Points);
         lineEmmiter.SetActive(mode == KinematicBallMode.Trail);
 
-
         thisMaterial.color = modesColor[(int)mode];
     }
 
@@ -32,18 +32,8 @@ public class KinematicBall : MonoBehaviour
     [ContextMenu("ChangeMode")]
     public void ChangeModes()
     {
-        switch (mode)
-        {
-            case KinematicBallMode.None:
-                mode = KinematicBallMode.Points;
-                break;
-            case KinematicBallMode.Points:
-                mode = KinematicBallMode.Trail;
-                break;
-            case KinematicBallMode.Trail:
-                mode = KinematicBallMode.None;
-                break;
-        }
+        mode++;
+        if (mode > KinematicBallMode.Trail) mode = 0;
         SetMode(mode);
     }
 }
