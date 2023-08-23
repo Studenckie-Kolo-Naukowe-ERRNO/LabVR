@@ -10,21 +10,13 @@ using UnityEngine.UI;
 public class ErrnoCharacterController : MonoBehaviour
 {
     private CharacterController characterController;
-    [SerializeField] private float currentCharacterSpeed;
     [Header("Loading")]
     [SerializeField] private Image loadingImage;
-    [SerializeField] private float fadeTime =1;
-    private Vector3 lastPos;
+    [SerializeField] private float fadeTime = 1;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         StartCoroutine(FadeInOut(false));
-    }
-
-    void Update()
-    {
-        currentCharacterSpeed = Vector3.Distance(lastPos, transform.position)/Time.deltaTime;
-        lastPos = transform.position;
     }
 
     IEnumerator FadeInOut(bool fadeIn)
@@ -46,5 +38,17 @@ public class ErrnoCharacterController : MonoBehaviour
         alpha = fadeIn ? 1f : 0f;
         fadeColor.a = alpha;
         loadingImage.color = fadeColor;
+    }
+    [ContextMenu("Fade out")]
+    public void FadeOut()
+    {
+        StopAllCoroutines();
+        StartCoroutine(FadeInOut(false));
+    }
+    [ContextMenu("Fade in")]
+    public void FadeIn()
+    {
+        StopAllCoroutines();
+        StartCoroutine(FadeInOut(true));
     }
 }
