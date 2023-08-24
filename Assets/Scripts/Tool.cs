@@ -72,7 +72,7 @@ public class Tool : XRGrabInteractable, IItem
 
     public void SetParentToXRRig()
     {
-        transform.SetParent(selectingInteractor.transform);
+        transform.SetParent(this.GetOldestInteractorSelecting().transform);
     }
 
     public void SetParentToWorld()
@@ -85,13 +85,13 @@ public class Tool : XRGrabInteractable, IItem
         if (rb == null) return;
         if (IsHolded())
         {
-            rb.centerOfMass = Vector3.zero;
             SetParentToXRRig();
+            rb.centerOfMass = Vector3.zero; 
         }
         else 
         {
-            rb.ResetCenterOfMass();
             SetParentToWorld();
+            rb.ResetCenterOfMass();
         }
         
     }
