@@ -32,7 +32,8 @@ public class Tool : XRGrabInteractable, IItem
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         inHands++;
-        if (rb != null) rb.centerOfMass = Vector3.zero;
+        
+        UpdateMassCenter();
 
 
         base.OnSelectEntered(args);
@@ -41,7 +42,8 @@ public class Tool : XRGrabInteractable, IItem
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         inHands--;
-        if (rb != null)rb.ResetCenterOfMass();
+        
+        UpdateMassCenter();
 
         base.OnSelectExited(args);  
     }
@@ -66,5 +68,31 @@ public class Tool : XRGrabInteractable, IItem
     public bool IsHolded()
     {
         return inHands > 0;
+    }
+
+    public void SetParentToXRRig()
+    {
+        transform.SetParent(selectingInteractor.transform);
+    }
+
+    public void SetParentToWorld()
+    {
+        transform.SetParent(null);
+    }
+
+    private void UpdateMassCenter()
+    {
+        if (rb == null) return;
+        if (IsHolded())
+        {
+            rb.centerOfMass = Vector3.zero;
+            SetParentToXRRig();
+        }
+        else 
+        {
+            rb.ResetCenterOfMass();
+            SetParentToWorld();
+        }
+        
     }
 }

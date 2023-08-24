@@ -53,7 +53,6 @@ public class HandPresence : MonoBehaviour
         foreach (Collider col in colliders)
         {
             col.gameObject.layer = LayerMask.NameToLayer(newState ? "PlayerHands" : "IgnoreTools");
-            Debug.Log(col.gameObject.layer);
         }
     }
 }
