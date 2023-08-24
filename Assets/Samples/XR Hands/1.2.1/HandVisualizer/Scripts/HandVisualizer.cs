@@ -75,6 +75,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
         HandGameObjects m_RightHandGameObjects;
 
         static readonly List<XRHandSubsystem> s_SubsystemsReuse = new List<XRHandSubsystem>();
+
+
         protected void Awake()
         {
 #if ENABLE_INPUT_SYSTEM
@@ -82,7 +84,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
                 InputSystem.InputSystem.settings.SetInternalFeatureFlag("USE_OPTIMIZED_CONTROLS", true);
 #endif // ENABLE_INPUT_SYSTEM
         }
-
+       
         protected void OnEnable()
         {
             if (m_Subsystem == null)
@@ -204,6 +206,8 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             handGameObjects.ToggleDebugDrawJoints(m_DebugDrawJoints && isTracked);
             handGameObjects.SetVelocityType(isTracked ? m_VelocityType : VelocityType.None);
 
+            if (controllerGameObject == null)
+                return;
             controllerGameObject.SetActive(!isTracked);
         }
 
@@ -413,6 +417,7 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
 
             public void ToggleDrawMesh(bool drawMesh)
             {
+                m_HandRoot.SetActive(drawMesh);
                 m_MeshController.enabled = drawMesh;
                 if (!drawMesh)
                     m_MeshController.handMeshRenderer.enabled = false;

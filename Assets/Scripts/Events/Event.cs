@@ -7,6 +7,8 @@ public class Event : ScriptableObject
 {
     [SerializeField] private int eventValue;
     private List<EventListener> listeners = new List<EventListener>();
+    
+    [ContextMenu("Raise event")]
     public void Raise() 
     {
         for (int i = listeners.Count - 1; i >= 0; i--)
