@@ -934,17 +934,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4e678b434848d904a81daec523e57041,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.1965256
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e678b434848d904a81daec523e57041,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.005000025
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e678b434848d904a81daec523e57041,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2315983
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e678b434848d904a81daec523e57041,
         type: 3}
@@ -984,7 +984,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4e678b434848d904a81daec523e57041,
         type: 3}
       propertyPath: m_Name
-      value: chair_01 Variant
+      value: chair_01_p
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4e678b434848d904a81daec523e57041,
         type: 3}
