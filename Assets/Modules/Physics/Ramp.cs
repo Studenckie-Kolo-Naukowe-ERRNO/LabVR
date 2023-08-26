@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class Ramp : MonoBehaviour
 {
-    [SerializeField] private Rigidbody ramp;
+    [SerializeField] private Transform ramp;
     [SerializeField] private float debugRampRotation;
+    [SerializeField] private Transform resetPos;
+    [SerializeField] private Rigidbody cube;
     [Header("Materials")]
     [SerializeField] private PhysicMaterial rampMaterial;
     [SerializeField] private PhysicMaterial blockMaterial;
@@ -21,6 +23,7 @@ public class Ramp : MonoBehaviour
 
     private void Start()
     {
+        ramp.rotation = (Quaternion.Euler(25, ramp.transform.eulerAngles.y, ramp.transform.eulerAngles.z));
         if (angleOut != null) angleOut.SetText($"{ramp.transform.rotation.x}");
         if (staticRamp != null) staticRamp.SetText($"{rampMaterial.staticFriction}");
         if (staticBlock != null) staticBlock.SetText($"{blockMaterial.staticFriction}");
@@ -34,7 +37,7 @@ public class Ramp : MonoBehaviour
     }
     public void MoveRamp(float angle)
     {
-        ramp.MoveRotation(Quaternion.Euler(angle, ramp.transform.eulerAngles.y, ramp.transform.eulerAngles.z));
+        ramp.rotation = (Quaternion.Euler(angle, ramp.transform.eulerAngles.y, ramp.transform.eulerAngles.z));
         if (angleOut != null) angleOut.SetText($"{angle}");
     }
     public void SetStaticRamp(float value)
@@ -60,5 +63,12 @@ public class Ramp : MonoBehaviour
         value = (float)Math.Round(value, 2);
         blockMaterial.dynamicFriction = value;
         if (dynamicBlock != null) dynamicBlock.SetText($"{value}");
+    }
+    [ContextMenu("Reset cube")]
+    public void ResetCube()
+    {
+        cube.transform.position = resetPos.position;
+        cube.transform.rotation = resetPos.rotation;
+        cube.velocity = Vector3.zero;
     }
 }

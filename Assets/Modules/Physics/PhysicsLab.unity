@@ -8256,6 +8256,16 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9051415083690978844, guid: 3e23cb0b929b03a40b92f69e3a4e7738,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051415083690978844, guid: 3e23cb0b929b03a40b92f69e3a4e7738,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9051415083838603229, guid: 3e23cb0b929b03a40b92f69e3a4e7738,
         type: 3}
       propertyPath: m_AnchorMax.x
