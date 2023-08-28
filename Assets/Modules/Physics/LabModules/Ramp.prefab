@@ -1603,8 +1603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb34fb0b5c895ae4498302b1ad4d791b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ramp: {fileID: 7497149524256429727}
-  debugRampRotation: 0
+  ramp: {fileID: 7497149524256429726}
   resetPos: {fileID: 594790111268249077}
   cube: {fileID: 7497149524381041536}
   rampMaterial: {fileID: 13400000, guid: 18c7906f580c3884c946d4b9d78ef182, type: 2}
@@ -1614,6 +1613,8 @@ MonoBehaviour:
   staticBlock: {fileID: 7497149524138874862}
   dynamicRamp: {fileID: 7497149523348498052}
   dynamicBlock: {fileID: 7497149524527319236}
+  speed: 10
+  targetAngle: 0
 --- !u!1 &7497149524046473067
 GameObject:
   m_ObjectHideFlags: 0
