@@ -4595,7 +4595,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5455921673492822005}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -4781,7 +4781,7 @@ GameObject:
   - component: {fileID: 3515264374957397918}
   m_Layer: 6
   m_Name: XR Origin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4817,6 +4817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dfc51832d255a648b1004b69d1014aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCam: {fileID: 5455921673492821998}
+  moveSpeed: 1
   loadingImage: {fileID: 7604260869230704197}
   fadeTime: 4
 --- !u!143 &5455921673528144386
@@ -4833,7 +4835,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.05
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.4
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
