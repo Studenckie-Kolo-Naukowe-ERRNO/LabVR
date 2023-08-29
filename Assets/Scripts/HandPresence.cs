@@ -11,12 +11,16 @@ public class HandPresence : MonoBehaviour
     private Rigidbody rb;
     private Collider[] colliders;
     private float colsDelay = 0.5f;
+    private float snapDistance = 0.2f;
     [SerializeField] private InputActionReference turnReference;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         colliders = GetComponentsInChildren<Collider>();
         turnReference.action.started += OnRotate;
+
+        rb.transform.position = target.position;
+        rb.transform.rotation = target.rotation;
     }
     private void OnDestroy()
     {
@@ -26,8 +30,15 @@ public class HandPresence : MonoBehaviour
     private void FixedUpdate()
     {
         float delta = Time.fixedDeltaTime;
-
-        rb.velocity = (target.position - transform.position) / delta;
+        Vector3 dist = target.position - transform.position;
+        if(dist.magnitude > snapDistance) 
+        {
+            SnapHands();
+        }
+        else
+        {
+            rb.velocity = dist / delta;
+        }
 
         Quaternion rotationDiff = target.rotation * Quaternion.Inverse(transform.rotation);
         rotationDiff.ToAngleAxis(out float angleInDegree, out Vector3 rotationAxis);
@@ -37,6 +48,10 @@ public class HandPresence : MonoBehaviour
         rb.angularVelocity = (rotationDiffInDegree * Mathf.Deg2Rad / delta);
     }
     private void OnRotate(InputAction.CallbackContext context)
+    {
+        SnapHands();
+    }
+    private void SnapHands()
     {
         rb.transform.position = target.position;
         rb.transform.rotation = target.rotation;
