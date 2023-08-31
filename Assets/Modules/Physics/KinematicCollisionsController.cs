@@ -19,6 +19,7 @@ public class KinematicCollisionsController : MonoBehaviour
         {
             rb[i].velocity = Vector3.zero;
             rb[i].transform.position = points[i].position;
+            rb[i].transform.rotation = points[i].rotation;
         }
         
     }

@@ -7,8 +7,8 @@ PhysicMaterial:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RampBlock
-  dynamicFriction: 0.01
-  staticFriction: 0
+  dynamicFriction: 0.86
+  staticFriction: 0.91
   bounciness: 0
   frictionCombine: 0
   bounceCombine: 0

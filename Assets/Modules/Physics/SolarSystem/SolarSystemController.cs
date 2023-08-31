@@ -14,6 +14,8 @@ public class SolarSystemController : MonoBehaviour
     private void Start()
     {
         asteroids.transform.localScale = new Vector3(distanceScale, distanceScale, distanceScale);
+        asteroids.Clear();
+        asteroids.Play();
         for (int i = 1; i < planets.Length; i++)
         {
             planets[i].SetObject(sizeScale, distanceScale);
