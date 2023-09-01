@@ -7,4 +7,6 @@ public interface IItem
     public ItemData GetItemData();
     public GameObject ThisObject();
     public bool IsHolded();
+
+    public bool CanBeSliced();
 }

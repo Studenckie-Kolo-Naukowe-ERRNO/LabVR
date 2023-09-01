@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliceableLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2304
   cutMaterial: {fileID: 2100000, guid: 9189a493a5c50c74fb547c868c55c98b, type: 2}
   cutForce: 2000
   igniteTime: 1
@@ -450,7 +450,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8297883453277265322}
+        m_TargetAssemblyTypeName: Lightsaber, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -534,6 +546,7 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   data: {fileID: 11400000, guid: 7ce7be506ef3a8744985bac77a1ff412, type: 2}
+  canBeSliced: 0
   OnToggle:
     m_PersistentCalls:
       m_Calls:

@@ -50,8 +50,12 @@ public class Lightsaber : MonoBehaviour
             if (hasHit)
             {
                 GameObject targetToSlice = hit.transform.gameObject;
-                Vector3 velocity = (endSlicePoint.position - swordLastPos) / Time.fixedDeltaTime;
-                Slice(targetToSlice, velocity);
+                targetToSlice.TryGetComponent(out Tool t);
+                if ((t != null && t.CanBeSliced()) || t==null)
+                {
+                    Vector3 velocity = (endSlicePoint.position - swordLastPos) / Time.fixedDeltaTime;
+                    Slice(targetToSlice, velocity);
+                }
             }
         }
         

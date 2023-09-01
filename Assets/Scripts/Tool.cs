@@ -7,6 +7,7 @@ public class Tool : XRGrabInteractable, IItem
 {
     [Header("Item")]
     [SerializeField] private ItemData data;
+    [SerializeField] private bool canBeSliced;
     [Header("Events")]
     [SerializeField] protected UnityEvent OnToggle;
     [SerializeField] protected UnityEvent OnUnToggle;
@@ -64,7 +65,10 @@ public class Tool : XRGrabInteractable, IItem
     {
         return this.gameObject;
     }
-
+    public bool CanBeSliced()
+    {
+        return canBeSliced && !IsHolded();
+    }
     public bool IsHolded()
     {
         return inHands > 0;
