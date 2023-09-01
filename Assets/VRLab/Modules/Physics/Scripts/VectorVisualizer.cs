@@ -15,6 +15,7 @@ namespace PhysicsLab
 
         [SerializeField]
         private TextMeshProUGUI textOutput;
+
         void Start()
         {
             if (rb == null) rb = GetComponentInParent<Rigidbody>();
