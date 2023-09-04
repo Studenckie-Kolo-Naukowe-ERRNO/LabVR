@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace GeoLab {
     public class MineRockOnHit : MonoBehaviour {
+        [SerializeField] private Vector3 smallRocksOffest;
         [SerializeField] private float health = 1000;
         [SerializeField] private GameObject[] smallRocksPrefabs;
         private List<GameObject> smallRocksGameobject = new List<GameObject>();
@@ -43,7 +44,7 @@ namespace GeoLab {
         private void CreateSmallRocks() {
             gameObject.GetComponent<MeshCollider>().enabled = false;
             foreach (GameObject smallRock in smallRocksGameobject) {
-                smallRock.transform.position = transform.position + new Vector3(0, 0.8f);
+                smallRock.transform.position = transform.position + smallRocksOffest;
                 smallRock.SetActive(true);
             }
         }
