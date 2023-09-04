@@ -5,13 +5,24 @@ namespace GeoLab {
     public class MineRockOnHit : MonoBehaviour {
         [SerializeField] private Vector3 smallRocksOffest;
         [SerializeField] private Vector3 smallRocksSize;
+        [SerializeField] private float getMineralsChance;
 
         [SerializeField] private float health = 1000;
         [SerializeField] private GameObject[] smallRocksPrefabs;
+        [SerializeField] private GameObject[] mineralsPrefabs;
+
         private List<GameObject> smallRocksGameobject = new List<GameObject>();
+        private GameObject mineralGameobject;
 
         private void Start() {
+            mineralGameobject = null;
+
+            float randomValue = Random.Range(0f, 1f);
+
             LoadSmallRocksOnScene();
+            if (randomValue < getMineralsChance) {
+                LoadMineralsOnScene();
+            }
         }
 
         private void OnCollisionEnter(Collision collision) {
@@ -27,6 +38,10 @@ namespace GeoLab {
 
         private void OnDestroy() {
             CreateSmallRocks();
+
+            if (mineralGameobject != null) {
+                CreateMineral();
+            }
         }
 
         private void LoadSmallRocksOnScene() {
@@ -38,17 +53,27 @@ namespace GeoLab {
             }
         }
 
+        private void LoadMineralsOnScene() {
+            int randomMineral = Random.Range(0, mineralsPrefabs.Length);
+
+            mineralGameobject = Instantiate(mineralsPrefabs[randomMineral]);
+        }
+
         private void DestroyTheRock() {
             Destroy(gameObject);
             return;
         }
 
         private void CreateSmallRocks() {
-            gameObject.GetComponent<MeshCollider>().enabled = false;
             foreach (GameObject smallRock in smallRocksGameobject) {
                 smallRock.transform.position = transform.position + smallRocksOffest;
                 smallRock.SetActive(true);
             }
+        }
+
+        private void CreateMineral() {
+            mineralGameobject.transform.position = transform.position + smallRocksOffest;
+            mineralGameobject.SetActive(true);
         }
     }
 }
