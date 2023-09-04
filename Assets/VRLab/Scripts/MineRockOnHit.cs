@@ -4,6 +4,8 @@ using UnityEngine;
 namespace GeoLab {
     public class MineRockOnHit : MonoBehaviour {
         [SerializeField] private Vector3 smallRocksOffest;
+        [SerializeField] private Vector3 smallRocksSize;
+
         [SerializeField] private float health = 1000;
         [SerializeField] private GameObject[] smallRocksPrefabs;
         private List<GameObject> smallRocksGameobject = new List<GameObject>();
@@ -31,7 +33,7 @@ namespace GeoLab {
             foreach (GameObject smallRock in smallRocksPrefabs) {
                 GameObject rock = Instantiate(smallRock);
                 rock.SetActive(false);
-                rock.transform.localScale = new Vector3(0.008f, 0.008f, 0.008f);
+                rock.transform.localScale = smallRocksSize;
                 smallRocksGameobject.Add(rock);
             }
         }
