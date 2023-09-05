@@ -13,8 +13,10 @@ namespace GeoLab {
 
         private List<GameObject> smallRocksGameobject = new List<GameObject>();
         private GameObject mineralGameobject;
+        private int toolsLayer;
 
         private void Start() {
+            toolsLayer = LayerMask.NameToLayer("Tools");
             mineralGameobject = null;
 
             float randomValue = Random.Range(0f, 1f);
@@ -26,7 +28,7 @@ namespace GeoLab {
         }
 
         private void OnCollisionEnter(Collision collision) {
-            if (collision.gameObject.layer == 8) {
+            if (collision.gameObject.layer == toolsLayer) {
                 Vector3 collisionForce = collision.impulse / Time.fixedDeltaTime;
                 health -= collisionForce.magnitude;
 
