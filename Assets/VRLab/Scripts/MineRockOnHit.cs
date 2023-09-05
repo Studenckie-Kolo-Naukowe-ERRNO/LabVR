@@ -10,6 +10,7 @@ namespace GeoLab {
         [SerializeField] private float health = 1000;
         [SerializeField] private GameObject[] smallRocksPrefabs;
         [SerializeField] private GameObject[] mineralsPrefabs;
+        [SerializeField] private ParticleSystem particleSystem;
 
         private List<GameObject> smallRocksGameobject = new List<GameObject>();
         private GameObject mineralGameobject;
@@ -22,6 +23,7 @@ namespace GeoLab {
             float randomValue = Random.Range(0f, 1f);
 
             LoadSmallRocksOnScene();
+
             if (randomValue < getMineralsChance) {
                 LoadMineralsOnScene();
             }
@@ -33,18 +35,8 @@ namespace GeoLab {
                 health -= collisionForce.magnitude;
 
                 if (health <= 0) {
-                    GetComponent<ParticleSystem>().Play();
-
                     DestroyTheRock();
                 }
-            }
-        }
-
-        private void OnDestroy() {
-            CreateSmallRocks();
-
-            if (mineralGameobject != null) {
-                CreateMineral();
             }
         }
 
@@ -64,7 +56,17 @@ namespace GeoLab {
         }
 
         private void DestroyTheRock() {
-            Destroy(gameObject, 4);
+            particleSystem.gameObject.transform.SetParent(null, false);
+            particleSystem.gameObject.transform.position = transform.gameObject.transform.position;
+            particleSystem.Play();
+
+            CreateSmallRocks();
+
+            if (mineralGameobject != null) {
+                CreateMineral();
+            }
+
+            Destroy(gameObject);
             return;
         }
 
