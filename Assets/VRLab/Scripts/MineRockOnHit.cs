@@ -33,6 +33,8 @@ namespace GeoLab {
                 health -= collisionForce.magnitude;
 
                 if (health <= 0) {
+                    GetComponent<ParticleSystem>().Play();
+
                     DestroyTheRock();
                 }
             }
@@ -62,7 +64,7 @@ namespace GeoLab {
         }
 
         private void DestroyTheRock() {
-            Destroy(gameObject);
+            Destroy(gameObject, 4);
             return;
         }
 
