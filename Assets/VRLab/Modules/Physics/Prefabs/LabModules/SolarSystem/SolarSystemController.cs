@@ -27,11 +27,10 @@ namespace PhysicsLab
             asteroids.Play();
             for (int i = 1; i < planets.Length; i++)
             {
-                TextMesh textMesh = planets[i].planetObject.GetComponentInChildren<TextMesh>();
                 planets[i].SetObject(sizeScale, distanceScale);
 
-                textMesh.text = planets[i].planetName;
-                textMesh.transform.position = planets[i].planetObject.transform.position;
+                planets[i].planetNameText.text = planets[i].planetName;
+                planets[i].planetNameText.transform.position = planets[i].planetObject.transform.position;
             }
         }
 
@@ -63,6 +62,25 @@ namespace PhysicsLab
             speedScale = 100;
         }
 
+        [ContextMenu("Planets Names On")]
+        public void PlanetsNamesOn()
+        {
+            foreach (Planet planet in planets)
+            {
+                planet.planetNameText.gameObject.SetActive(true);
+            }
+        }
+
+        [ContextMenu("Planets Names Off")]
+        public void PlanetsNamesOff()
+        {
+            foreach (Planet planet in planets)
+            {
+                planet.planetNameText.gameObject.SetActive(false);
+            }
+
+        }
+
         private void CalculatePosOfTheMoon() {
             Vector3 earthPosition = earthGameObject.transform.position;
             Vector3 initialPosition = earthPosition + new Vector3(orbitRadius, 0f, 0f);
@@ -89,6 +107,7 @@ namespace PhysicsLab
         public float rotationPeriod;
         public float revolutionPeriod;
         public GameObject planetObject;
+        public TextMesh planetNameText;
 
         public void SetObject(float scale, float dScale)
         {
