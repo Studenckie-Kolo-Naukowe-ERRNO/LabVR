@@ -27,7 +27,11 @@ namespace PhysicsLab
             asteroids.Play();
             for (int i = 1; i < planets.Length; i++)
             {
+                TextMesh textMesh = planets[i].planetObject.GetComponentInChildren<TextMesh>();
                 planets[i].SetObject(sizeScale, distanceScale);
+
+                textMesh.text = planets[i].planetName;
+                textMesh.transform.position = planets[i].planetObject.transform.position;
             }
         }
 
@@ -37,10 +41,12 @@ namespace PhysicsLab
             {
                 float angle = (speedScale * Time.deltaTime) / (planets[i].revolutionPeriod / 365.25f);
                 planets[i].planetObject.transform.RotateAround(transform.position, transform.up, angle);
+
             }
 
             MoveTheMoon();
         }
+
 
         public void ChangeSpeed(float newValue)
         {
