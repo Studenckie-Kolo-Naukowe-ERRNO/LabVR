@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 namespace PhysicsLab
@@ -12,9 +13,15 @@ namespace PhysicsLab
         [SerializeField] private ParticleSystem asteroids;
         [SerializeField] private Planet[] planets;
 
+        [SerializeField] private GameObject earthGameObject;
+        [SerializeField] private GameObject moonGameObject;
+        [SerializeField] private float orbitSpeed;
+        [SerializeField] private float orbitRadius;
+
         private const int CHANGE_SPEED_MULTIPLIER = 200;
         private void Start()
         {
+            CalculatePosOfTheMoon();
             asteroids.transform.localScale = new Vector3(distanceScale, distanceScale, distanceScale);
             asteroids.Clear();
             asteroids.Play();
@@ -31,11 +38,37 @@ namespace PhysicsLab
                 float angle = (speedScale * Time.deltaTime) / (planets[i].revolutionPeriod / 365.25f);
                 planets[i].planetObject.transform.RotateAround(transform.position, transform.up, angle);
             }
+
+            MoveTheMoon();
         }
 
         public void ChangeSpeed(float newValue)
         {
             speedScale = newValue * CHANGE_SPEED_MULTIPLIER;
+        }
+
+        [ContextMenu("Stop All The Planets")]
+        public void StopsAllThePlanets() {
+            speedScale = 0;
+        }
+
+        [ContextMenu("Start All The Planets")]
+        public void StartAllThePlanets() {
+            speedScale = 100;
+        }
+
+        private void CalculatePosOfTheMoon() {
+            Vector3 earthPosition = earthGameObject.transform.position;
+            Vector3 initialPosition = earthPosition + new Vector3(orbitRadius, 0f, 0f);
+
+            moonGameObject.transform.position = initialPosition;
+        }
+
+        private void MoveTheMoon() {
+            Vector3 earthPosition = earthGameObject.transform.position;
+            float angle = orbitSpeed * Time.deltaTime * speedScale;
+
+            moonGameObject.transform.RotateAround(earthPosition, Vector3.up, angle);
         }
     }
 
