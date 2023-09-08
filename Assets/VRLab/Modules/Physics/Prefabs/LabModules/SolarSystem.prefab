@@ -506,70 +506,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeScale: 100000
-  distanceScale: 1.3
+  distanceScale: 2
   speedScale: 100
   asteroids: {fileID: 7357587491636118363}
   planets:
   - planetName: Sun
     diameter: 1391400
     distanceFromSun: 0
-    rotationPeriod: 0
+    rotationPeriod: 2073600
     revolutionPeriod: 0
     planetObject: {fileID: 6605375854239397309}
     planetNameText: {fileID: 6434698555672539777}
   - planetName: Mercury
     diameter: 4879
     distanceFromSun: 0.39
-    rotationPeriod: 0
+    rotationPeriod: 58646
     revolutionPeriod: 87.97
     planetObject: {fileID: 6082360669135970776}
     planetNameText: {fileID: 5052891451737708319}
   - planetName: Venus
     diameter: 12104
     distanceFromSun: 0.72
-    rotationPeriod: 0
+    rotationPeriod: 243025
     revolutionPeriod: 224.7
     planetObject: {fileID: 5816079989180981354}
     planetNameText: {fileID: 5378400358158802916}
   - planetName: Earth
     diameter: 12756
     distanceFromSun: 1
-    rotationPeriod: 0
+    rotationPeriod: 86164
     revolutionPeriod: 365.26
     planetObject: {fileID: 4238529543862450183}
     planetNameText: {fileID: 6959006021511856614}
   - planetName: Mars
     diameter: 6792
     distanceFromSun: 1.52
-    rotationPeriod: 0
+    rotationPeriod: 88642
     revolutionPeriod: 686.6512
     planetObject: {fileID: 3765182359592445745}
     planetNameText: {fileID: 7387972458004831909}
   - planetName: Jupiter
     diameter: 142984
     distanceFromSun: 5.2
-    rotationPeriod: 0
+    rotationPeriod: 35964
     revolutionPeriod: 4331.7466
     planetObject: {fileID: 612019547369726049}
     planetNameText: {fileID: 6421054814560877187}
   - planetName: Saturn
     diameter: 120536
     distanceFromSun: 9.54
-    rotationPeriod: 0
+    rotationPeriod: 38397
     revolutionPeriod: 10759.971
     planetObject: {fileID: 7925710730345590876}
     planetNameText: {fileID: 6854821601568930467}
   - planetName: Uranus
     diameter: 51118
     distanceFromSun: 19.2
-    rotationPeriod: 0
+    rotationPeriod: 61560
     revolutionPeriod: 30683.812
     planetObject: {fileID: 2468223262438298122}
     planetNameText: {fileID: 268072967060413438}
   - planetName: Neptune
     diameter: 49528
     distanceFromSun: 30.06
-    rotationPeriod: 0
+    rotationPeriod: 58248
     revolutionPeriod: 60191.55
     planetObject: {fileID: 2736677628504883444}
     planetNameText: {fileID: 6653791306913864043}

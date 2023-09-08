@@ -22,10 +22,13 @@ namespace PhysicsLab
         [SerializeField] private float moonDiameter;
         [SerializeField] private float moonDistanceFromEarth;
 
+        private bool planetsCanRotate;
+
         private const int CHANGE_SPEED_MULTIPLIER = 200;
         private void Start()
         {
-           
+            planetsCanRotate = true;
+
             asteroids.transform.localScale = new Vector3(distanceScale, distanceScale, distanceScale);
             asteroids.Clear();
             asteroids.Play();
@@ -48,6 +51,11 @@ namespace PhysicsLab
             {
                 float angle = (speedScale * Time.deltaTime) / (planets[i].revolutionPeriod / 365.25f);
                 planets[i].planetObject.transform.RotateAround(transform.position, transform.up, angle);
+
+                if (planetsCanRotate)
+                {
+                    planets[i].planetObject.transform.Rotate(Vector3.up * 360.0f / planets[i].rotationPeriod * Time.deltaTime);
+                }
 
             }
         }
@@ -84,6 +92,20 @@ namespace PhysicsLab
             {
                 planet.planetNameText.gameObject.SetActive(false);
             }
+
+        }
+
+        [ContextMenu("Planets Rotates Off")]
+        public void PlanetsRotationOff()
+        {
+            planetsCanRotate = false;
+
+        }
+
+        [ContextMenu("Planets Rotates On")]
+        public void PlanetsRotationOn()
+        {
+            planetsCanRotate = true;
 
         }
 
