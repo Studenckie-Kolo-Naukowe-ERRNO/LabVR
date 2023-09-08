@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.EditorTools;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace PhysicsLab
 {
@@ -17,11 +18,14 @@ namespace PhysicsLab
         [SerializeField] private GameObject moonGameObject;
         [SerializeField] private float orbitSpeed;
         [SerializeField] private float orbitRadius;
+        [SerializeField] private float moonRevolutionPeriod;
+        [SerializeField] private float moonDiameter;
+        [SerializeField] private float moonDistanceFromEarth;
 
         private const int CHANGE_SPEED_MULTIPLIER = 200;
         private void Start()
         {
-            CalculatePosOfTheMoon();
+           
             asteroids.transform.localScale = new Vector3(distanceScale, distanceScale, distanceScale);
             asteroids.Clear();
             asteroids.Play();
@@ -32,18 +36,20 @@ namespace PhysicsLab
                 planets[i].planetNameText.text = planets[i].planetName;
                 planets[i].planetNameText.transform.position = planets[i].planetObject.transform.position;
             }
+            CalculatePosOfTheMoon();
         }
 
         private void Update()
         {
+
+            MoveTheMoon();
+
             for (int i = 1; i < planets.Length; i++)
             {
                 float angle = (speedScale * Time.deltaTime) / (planets[i].revolutionPeriod / 365.25f);
                 planets[i].planetObject.transform.RotateAround(transform.position, transform.up, angle);
 
             }
-
-            MoveTheMoon();
         }
 
 
@@ -82,17 +88,19 @@ namespace PhysicsLab
         }
 
         private void CalculatePosOfTheMoon() {
-            Vector3 earthPosition = earthGameObject.transform.position;
-            Vector3 initialPosition = earthPosition + new Vector3(orbitRadius, 0f, 0f);
+            Vector3 earthPosition = earthGameObject.transform.localPosition;
+            float outsideEarth = earthPosition.x + earthGameObject.transform.localScale.x;
 
-            moonGameObject.transform.position = initialPosition;
+            float size = moonDiameter / sizeScale;
+            moonGameObject.transform.localScale = new Vector3(size, size, size);
+            moonGameObject.transform.localPosition = new Vector3(moonDistanceFromEarth / distanceScale + outsideEarth, 0, 0);
         }
 
         private void MoveTheMoon() {
             Vector3 earthPosition = earthGameObject.transform.position;
-            float angle = orbitSpeed * Time.deltaTime * speedScale;
 
-            moonGameObject.transform.RotateAround(earthPosition, Vector3.up, angle);
+            float angle = (speedScale * Time.deltaTime) / (moonRevolutionPeriod / 365.25f);
+            moonGameObject.transform.RotateAround(earthPosition, transform.up, angle);
         }
     }
 
