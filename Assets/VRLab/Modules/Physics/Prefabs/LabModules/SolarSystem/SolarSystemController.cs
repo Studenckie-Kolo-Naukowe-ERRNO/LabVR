@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,22 +9,27 @@ namespace PhysicsLab
 {
     public class SolarSystemController : MonoBehaviour
     {
+        [SerializeField] private GameObject cameraGamobject;
         [SerializeField] private float sizeScale = 100000;
         [SerializeField] private float distanceScale = 2;
         [SerializeField] private float speedScale = 100;
         [SerializeField] private ParticleSystem asteroids;
         [SerializeField] private Planet[] planets;
         [SerializeField] private Planet moon;
+        [SerializeField] private bool PlanetNamesTextAllignToPlayer;
 
         [Tooltip("\"Revolution\" refers the object's orbital motion around another object")]
         [SerializeField] private bool planetsCanRevolute;
         
         [Tooltip("\"Rotation\" refers to an object's spinning motion about its own axis.")]
-        [SerializeField] private bool planetsCanRotate;
+        public bool planetsCanRotate;
 
         private const int CHANGE_SPEED_MULTIPLIER = 200;
         private void Start()
         {
+            if (cameraGamobject == null) {
+                cameraGamobject = GameObject.FindGameObjectWithTag("MainCamera");
+            }
             SetPlanets();
         }
         
@@ -33,8 +39,24 @@ namespace PhysicsLab
             {
                 if(planetsCanRotate)planets[i].RotatePlanet(speedScale);
                 if(planetsCanRevolute)planets[i].RevolutePlanet(speedScale);
+                if (PlanetNamesTextAllignToPlayer && cameraGamobject != null)
+                    planets[i].planetNameText.transform.LookAt(cameraGamobject.transform);
             }
             if (planetsCanRotate) moon.RevolutePlanet(speedScale);
+        }
+
+        private void OnTriggerEnter(Collider collider) 
+        {
+            if (collider.CompareTag("Player")) {
+                PlanetNamesTextAllignToPlayer = true;
+            }
+        }
+
+        private void OnTriggerExit(Collider collider) 
+        {
+            if (collider.CompareTag("Player")) {
+                PlanetNamesTextAllignToPlayer = false;
+            }
         }
 
         [ContextMenu("Set planets")]
@@ -47,8 +69,8 @@ namespace PhysicsLab
             {
                 planets[i].SetObject(sizeScale, distanceScale, planets[0].planetObject.transform);
 
-                planets[i].planetNameText.text = planets[i].planetName;
-                planets[i].planetNameText.transform.position = planets[i].planetObject.transform.position;
+                planets[i].planetNameText.SetText(planets[i].planetName);
+                planets[i].planetNameText.transform.localPosition = new Vector3(0, -1, 0);
             }
 
             moon.SetObject(sizeScale, distanceScale, planets[3].planetObject.transform);
@@ -60,46 +82,26 @@ namespace PhysicsLab
             speedScale = newValue * CHANGE_SPEED_MULTIPLIER;
         }
 
-        [ContextMenu("Stop All The Planets")]
-        public void StopsAllThePlanets() {
-            speedScale = 0;
+        [ContextMenu("Toggle movement of all The Planets")]
+        public void TogglePlanetsMovement() {
+            planetsCanRevolute = !planetsCanRevolute;
         }
 
-        [ContextMenu("Start All The Planets")]
-        public void StartAllThePlanets() {
-            speedScale = 100;
-        }
 
-        [ContextMenu("Planets Names On")]
-        public void PlanetsNamesOn()
+        [ContextMenu("Toggle Planets Names")]
+        public void TogglePlanetsNames()
         {
             foreach (Planet planet in planets)
             {
-                planet.planetNameText.gameObject.SetActive(true);
+                planet.planetNameText.gameObject.SetActive(!planet.planetNameText.gameObject.activeSelf);
             }
         }
 
-        [ContextMenu("Planets Names Off")]
-        public void PlanetsNamesOff()
+
+        [ContextMenu("Toggle Planets Rotation")]
+        public void TogglePlanetsRotation()
         {
-            foreach (Planet planet in planets)
-            {
-                planet.planetNameText.gameObject.SetActive(false);
-            }
-
-        }
-
-        [ContextMenu("Planets Rotates Off")]
-        public void PlanetsRotationOff()
-        {
-            planetsCanRotate = false;
-
-        }
-
-        [ContextMenu("Planets Rotates On")]
-        public void PlanetsRotationOn()
-        {
-            planetsCanRotate = true;
+            planetsCanRotate = !planetsCanRotate;
 
         }
 
@@ -119,7 +121,7 @@ namespace PhysicsLab
         public float rotationPeriod;
         public float revolutionPeriod;
         public GameObject planetObject;
-        public TextMesh planetNameText;
+        public TextMeshPro planetNameText;
 
         private Transform rotateAround;
 

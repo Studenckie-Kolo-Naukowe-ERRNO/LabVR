@@ -126,6 +126,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &316317965 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5455921673492822005, guid: fb97896a4ef7cef478156ad5fd71c796,
+    type: 3}
+  m_PrefabInstance: {fileID: 507502996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &334381279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2750052910975731756, guid: 1fb36ff292500494e9f4e7c2626fb92f,
@@ -553,7 +559,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-11740
+  m_Name: pb_Mesh-24478
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -766,7 +772,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-11642
+  m_Name: pb_Mesh-24380
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -931,6 +937,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1181506308}
     m_Modifications:
+    - target: {fileID: 734548929083780237, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 734548929083780237, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 734548929083780237, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 734548929083780237, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 734548929083780237, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 734548929083780237, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2750052910975731756, guid: 1fb36ff292500494e9f4e7c2626fb92f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1001,6 +1037,36 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1749323299}
+    - target: {fileID: 5933547735475632089, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933547735475632089, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933547735475632089, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933547735475632089, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933547735475632089, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933547735475632089, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6315914744762987433, guid: 1fb36ff292500494e9f4e7c2626fb92f,
         type: 3}
       propertyPath: m_Mesh
@@ -1011,6 +1077,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SolarSystemRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 6645016147240817947, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645016147240817947, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: cameraGamobject
+      value: 
+      objectReference: {fileID: 316317965}
     - target: {fileID: 6904686393550415794, guid: 1fb36ff292500494e9f4e7c2626fb92f,
         type: 3}
       propertyPath: m_Mesh
@@ -1019,7 +1095,42 @@ PrefabInstance:
     - target: {fileID: 6904686393550415794, guid: 1fb36ff292500494e9f4e7c2626fb92f,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 296
+      value: 389
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101716991522833643, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101716991522833643, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101716991522833643, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101716991522833643, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101716991522833643, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101716991522833643, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949112554670702769, guid: 1fb36ff292500494e9f4e7c2626fb92f,
+        type: 3}
+      propertyPath: m_Name
+      value: ControlPanel
       objectReference: {fileID: 0}
     - target: {fileID: 8136001060069089500, guid: 1fb36ff292500494e9f4e7c2626fb92f,
         type: 3}
@@ -1029,7 +1140,7 @@ PrefabInstance:
     - target: {fileID: 8136001060069089500, guid: 1fb36ff292500494e9f4e7c2626fb92f,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 293
+      value: 386
       objectReference: {fileID: 0}
     - target: {fileID: 8969571751725144380, guid: 1fb36ff292500494e9f4e7c2626fb92f,
         type: 3}
