@@ -13,53 +13,47 @@ namespace PhysicsLab
         [SerializeField] private float speedScale = 100;
         [SerializeField] private ParticleSystem asteroids;
         [SerializeField] private Planet[] planets;
+        [SerializeField] private Planet moon;
 
-        [SerializeField] private GameObject earthGameObject;
-        [SerializeField] private GameObject moonGameObject;
-        [SerializeField] private float orbitSpeed;
-        [SerializeField] private float orbitRadius;
-        [SerializeField] private float moonRevolutionPeriod;
-        [SerializeField] private float moonDiameter;
-        [SerializeField] private float moonDistanceFromEarth;
-
-        private bool planetsCanRotate;
+        [Tooltip("\"Revolution\" refers the object's orbital motion around another object")]
+        [SerializeField] private bool planetsCanRevolute;
+        
+        [Tooltip("\"Rotation\" refers to an object's spinning motion about its own axis.")]
+        [SerializeField] private bool planetsCanRotate;
 
         private const int CHANGE_SPEED_MULTIPLIER = 200;
         private void Start()
         {
-            planetsCanRotate = true;
+            SetPlanets();
+        }
+        
+        private void Update()
+        {
+            for (int i = 1; i < planets.Length; i++)
+            {
+                if(planetsCanRotate)planets[i].RotatePlanet(speedScale);
+                if(planetsCanRevolute)planets[i].RevolutePlanet(speedScale);
+            }
+            if (planetsCanRotate) moon.RevolutePlanet(speedScale);
+        }
 
+        [ContextMenu("Set planets")]
+        public void SetPlanets()
+        {
             asteroids.transform.localScale = new Vector3(distanceScale, distanceScale, distanceScale);
             asteroids.Clear();
             asteroids.Play();
             for (int i = 1; i < planets.Length; i++)
             {
-                planets[i].SetObject(sizeScale, distanceScale);
+                planets[i].SetObject(sizeScale, distanceScale, planets[0].planetObject.transform);
 
                 planets[i].planetNameText.text = planets[i].planetName;
                 planets[i].planetNameText.transform.position = planets[i].planetObject.transform.position;
             }
-            CalculatePosOfTheMoon();
+
+            moon.SetObject(sizeScale, distanceScale, planets[3].planetObject.transform);
+            moon.planetObject.transform.parent = planets[3].planetObject.transform;
         }
-
-        private void Update()
-        {
-
-            MoveTheMoon();
-
-            for (int i = 1; i < planets.Length; i++)
-            {
-                float angle = (speedScale * Time.deltaTime) / (planets[i].revolutionPeriod / 365.25f);
-                planets[i].planetObject.transform.RotateAround(transform.position, transform.up, angle);
-
-                if (planetsCanRotate)
-                {
-                    planets[i].planetObject.transform.Rotate(Vector3.up * 360.0f / planets[i].rotationPeriod * Time.deltaTime);
-                }
-
-            }
-        }
-
 
         public void ChangeSpeed(float newValue)
         {
@@ -109,21 +103,6 @@ namespace PhysicsLab
 
         }
 
-        private void CalculatePosOfTheMoon() {
-            Vector3 earthPosition = earthGameObject.transform.localPosition;
-            float outsideEarth = earthPosition.x + earthGameObject.transform.localScale.x;
-
-            float size = moonDiameter / sizeScale;
-            moonGameObject.transform.localScale = new Vector3(size, size, size);
-            moonGameObject.transform.localPosition = new Vector3(moonDistanceFromEarth / distanceScale + outsideEarth, 0, 0);
-        }
-
-        private void MoveTheMoon() {
-            Vector3 earthPosition = earthGameObject.transform.position;
-
-            float angle = (speedScale * Time.deltaTime) / (moonRevolutionPeriod / 365.25f);
-            moonGameObject.transform.RotateAround(earthPosition, transform.up, angle);
-        }
     }
 
     [System.Serializable]
@@ -134,17 +113,41 @@ namespace PhysicsLab
         public float diameter;
         [Tooltip("(au)")]
         public float distanceFromSun;
+        [Tooltip("(au)")]
+        public float distanceOffset;
+        [Space]
         public float rotationPeriod;
         public float revolutionPeriod;
         public GameObject planetObject;
         public TextMesh planetNameText;
 
-        public void SetObject(float scale, float dScale)
+        private Transform rotateAround;
+
+        public void SetObject(float scale, float dScale, Transform rotateAnhor)
         {
             if (planetObject == null) return;
-            float size = diameter / scale;
+            rotateAround = rotateAnhor;
+
+            float size = ((float)Mathp.KmToAu(diameter) / dScale)*scale;
             planetObject.transform.localScale = new Vector3(size, size, size);
-            planetObject.transform.localPosition = new Vector3(distanceFromSun / dScale, 0, 0);
+            planetObject.transform.localPosition = rotateAround.localPosition + new Vector3((distanceFromSun+ distanceOffset) / dScale, 0, 0);
         }
+        public void RevolutePlanet(float speed)
+        {
+            if (revolutionPeriod != 0)
+            {
+                float angle = (speed * Time.deltaTime) / (revolutionPeriod / 365.25f);
+                planetObject.transform.RotateAround(rotateAround.position, rotateAround.transform.up, angle);
+            }
+        }
+
+        public void RotatePlanet(float speed)
+        {
+            if (rotationPeriod!=0)
+            {
+                planetObject.transform.Rotate((Vector3.up * speed) / (rotationPeriod * Time.deltaTime));
+            }
+        }
+        
     }
 }

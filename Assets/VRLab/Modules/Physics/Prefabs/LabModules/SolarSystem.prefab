@@ -129,7 +129,7 @@ Transform:
   m_Children:
   - {fileID: 9177636851838351397}
   m_Father: {fileID: 3982403993990842542}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6438248213419095724
 MeshFilter:
@@ -305,11 +305,11 @@ Transform:
   m_GameObject: {fileID: 1259691307899867321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.20000002, y: 0.20000002, z: 0.20000002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3982403993990842542}
-  m_RootOrder: 9
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &139136836207364523
 MeshFilter:
@@ -505,14 +505,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e5055dfce2794cbcb8dde5c8c0f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeScale: 100000
-  distanceScale: 2
+  sizeScale: 500
+  distanceScale: 3.25
   speedScale: 100
   asteroids: {fileID: 7357587491636118363}
   planets:
   - planetName: Sun
     diameter: 1391400
     distanceFromSun: 0
+    distanceOffset: 0
     rotationPeriod: 2073600
     revolutionPeriod: 0
     planetObject: {fileID: 6605375854239397309}
@@ -520,6 +521,7 @@ MonoBehaviour:
   - planetName: Mercury
     diameter: 4879
     distanceFromSun: 0.39
+    distanceOffset: 0
     rotationPeriod: 58646
     revolutionPeriod: 87.97
     planetObject: {fileID: 6082360669135970776}
@@ -527,6 +529,7 @@ MonoBehaviour:
   - planetName: Venus
     diameter: 12104
     distanceFromSun: 0.72
+    distanceOffset: 0
     rotationPeriod: 243025
     revolutionPeriod: 224.7
     planetObject: {fileID: 5816079989180981354}
@@ -534,6 +537,7 @@ MonoBehaviour:
   - planetName: Earth
     diameter: 12756
     distanceFromSun: 1
+    distanceOffset: 0
     rotationPeriod: 86164
     revolutionPeriod: 365.26
     planetObject: {fileID: 4238529543862450183}
@@ -541,6 +545,7 @@ MonoBehaviour:
   - planetName: Mars
     diameter: 6792
     distanceFromSun: 1.52
+    distanceOffset: 0
     rotationPeriod: 88642
     revolutionPeriod: 686.6512
     planetObject: {fileID: 3765182359592445745}
@@ -548,6 +553,7 @@ MonoBehaviour:
   - planetName: Jupiter
     diameter: 142984
     distanceFromSun: 5.2
+    distanceOffset: 0
     rotationPeriod: 35964
     revolutionPeriod: 4331.7466
     planetObject: {fileID: 612019547369726049}
@@ -555,6 +561,7 @@ MonoBehaviour:
   - planetName: Saturn
     diameter: 120536
     distanceFromSun: 9.54
+    distanceOffset: 0
     rotationPeriod: 38397
     revolutionPeriod: 10759.971
     planetObject: {fileID: 7925710730345590876}
@@ -562,6 +569,7 @@ MonoBehaviour:
   - planetName: Uranus
     diameter: 51118
     distanceFromSun: 19.2
+    distanceOffset: 0
     rotationPeriod: 61560
     revolutionPeriod: 30683.812
     planetObject: {fileID: 2468223262438298122}
@@ -569,17 +577,22 @@ MonoBehaviour:
   - planetName: Neptune
     diameter: 49528
     distanceFromSun: 30.06
+    distanceOffset: 0
     rotationPeriod: 58248
     revolutionPeriod: 60191.55
     planetObject: {fileID: 2736677628504883444}
     planetNameText: {fileID: 6653791306913864043}
-  earthGameObject: {fileID: 4238529543862450183}
-  moonGameObject: {fileID: 1259691307899867321}
-  orbitSpeed: 0.3
-  orbitRadius: 0.06
-  moonRevolutionPeriod: 27.322
-  moonDiameter: 3474.8
-  moonDistanceFromEarth: 0.00257
+  moon:
+    planetName: Moon
+    diameter: 3475
+    distanceFromSun: 0.0025
+    distanceOffset: 0.08
+    rotationPeriod: 0
+    revolutionPeriod: 27.322
+    planetObject: {fileID: 1259691307899867321}
+    planetNameText: {fileID: 0}
+  planetsCanRevolute: 1
+  planetsCanRotate: 1
 --- !u!1 &1681449105752369798
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +722,7 @@ Transform:
   m_Children:
   - {fileID: 3543373266054361096}
   m_Father: {fileID: 3982403993990842542}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6394518049381744612
 MeshFilter:
@@ -890,7 +903,7 @@ Transform:
   m_Children:
   - {fileID: 6102153277043484367}
   m_Father: {fileID: 3982403993990842542}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1586995489484965096
 MeshFilter:
@@ -1071,7 +1084,7 @@ Transform:
   m_Children:
   - {fileID: 3950281059711392863}
   m_Father: {fileID: 3982403993990842542}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5513063233166050293
 MeshFilter:
@@ -1155,7 +1168,7 @@ Transform:
   m_Children:
   - {fileID: 8741296817656057760}
   m_Father: {fileID: 3982403993990842542}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1033661356783076914
 MeshFilter:
@@ -6612,13 +6625,13 @@ Transform:
   - {fileID: 7197893447802505953}
   - {fileID: 7473872431845568690}
   - {fileID: 5768282870691531226}
+  - {fileID: 6063422750704952382}
   - {fileID: 7794832925167223156}
   - {fileID: 2580843753519973429}
   - {fileID: 2672730815520899988}
   - {fileID: 6691779304422051966}
   - {fileID: 8852323259821391184}
   - {fileID: 4563221664467628194}
-  - {fileID: 6063422750704952382}
   m_Father: {fileID: 1675805831544841090}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6655,7 +6668,7 @@ Transform:
   - {fileID: 3077740476164715489}
   - {fileID: 1473811575443323074}
   m_Father: {fileID: 3982403993990842542}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6219882613250910684
 MeshFilter:
