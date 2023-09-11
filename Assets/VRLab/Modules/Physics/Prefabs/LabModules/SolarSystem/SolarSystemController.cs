@@ -62,7 +62,7 @@ namespace PhysicsLab
         [ContextMenu("Set planets")]
         public void SetPlanets()
         {
-            asteroids.transform.localScale = new Vector3(distanceScale, distanceScale, distanceScale);
+            asteroids.transform.localScale = new Vector3(distanceScale/2, distanceScale/2, distanceScale/2);
             asteroids.Clear();
             asteroids.Play();
             for (int i = 1; i < planets.Length; i++)
