@@ -140,7 +140,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4491143371300291278}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -311,6 +311,8 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   data: {fileID: 11400000, guid: 414c7ef6cf63064449abb1b2a2b84667, type: 2}
+  canBeSliced: 0
+  thisObiectMesh: {fileID: 0}
   OnToggle:
     m_PersistentCalls:
       m_Calls: []

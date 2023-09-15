@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/VRLab/Modules/Physics/PhysicsLab.unity
     guid: 7f09e5aae76b0cb42819df11fc3bd262
+  - enabled: 1
+    path: Assets/VRLab/Modules/Geology/GeoLab.unity
+    guid: c93d8ffc9a7b3c54485fdf9c26661f85
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: d0f599f61b8396749a730817aa4292f7,
       type: 2}
