@@ -5,18 +5,23 @@ using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 namespace VRLabEssentials
 {
-
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(AudioSource))]
     public class Tool : XRGrabInteractable, IItem
     {
         [Header("Item")]
         [SerializeField] private ItemData data;
         [SerializeField] private bool canBeSliced;
         [SerializeField] private GameObject thisObiectMesh;
+        [Header("Effects")]
+        [SerializeField] protected AudioClip pickSound;
+        [SerializeField] protected AudioClip useSound;
+        private AudioSource itemAudioSource;
         [Header("Events")]
         [SerializeField] protected UnityEvent OnToggle;
         [SerializeField] protected UnityEvent OnUnToggle;
         [SerializeField] protected UnityEvent InHand;
-
+        
         private Rigidbody rb;
 
         protected bool toggled = false;
@@ -25,6 +30,7 @@ namespace VRLabEssentials
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            itemAudioSource = GetComponent<AudioSource>();
         }
         private void Update()
         {
@@ -36,10 +42,13 @@ namespace VRLabEssentials
 
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
+            if(inHands == 0 && pickSound != null)
+            {
+                itemAudioSource.PlayOneShot(pickSound);
+            }
             inHands++;
 
             UpdateMassCenter();
-
 
             base.OnSelectEntered(args);
         }
@@ -58,6 +67,8 @@ namespace VRLabEssentials
             if (toggled) OnUnToggle.Invoke();
             else OnToggle.Invoke();
             toggled = !toggled;
+
+            if(useSound != null) itemAudioSource.PlayOneShot(useSound);
             base.OnActivated(args);
         }
         public ItemData GetItemData()
