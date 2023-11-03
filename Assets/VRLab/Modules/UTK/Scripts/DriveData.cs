@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace UTKLab
 {
-    [CreateAssetMenu(menuName = "Components/Disc")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Components/Disc")]
     public class DriveData : ScriptableObject
     {
         public enum DriveInterface
