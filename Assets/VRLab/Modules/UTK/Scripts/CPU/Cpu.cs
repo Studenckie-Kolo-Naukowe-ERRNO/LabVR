@@ -5,15 +5,18 @@ using UnityEngine;
 namespace UTKLab {
     public class Cpu : MonoBehaviour {
 
+        [Header("Scriptable Objects")]
         [SerializeField] private CpuArchitecture cpuArchitecture;
         [SerializeField] private CpuSocket cpuSocket;
-        [SerializeField] private string model;
-        [SerializeField] private float clockRate;
-        [SerializeField] private int cores;
-        [SerializeField] private int threads;
+
+        [Header("CPU specifications")]
         [SerializeField] private bool unlockedMultiplier;
         [SerializeField] private bool integratedGraphics;
+        [SerializeField] private string model;
+        [SerializeField] private int cores;
+        [SerializeField] private int threads;
         [SerializeField] private int TDP;
+        [SerializeField] private float clockRate;
 
         [ContextMenu("PrintPerformance")]
         public void PrintPerformance() {
