@@ -31,6 +31,9 @@ namespace UTKLab {
         private float MultiThreadPerformance() {
             return clockRate * cpuArchitecture.ipc * threads * cpuArchitecture.multiThreadMultipiler;
         }
-
+        public CpuSocket GetCpuSocket()
+        {
+            return cpuSocket;
+        }
     }
 }

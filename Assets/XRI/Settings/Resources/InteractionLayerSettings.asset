@@ -15,9 +15,9 @@ MonoBehaviour:
   m_LayerNames:
   - Default
   - Hat
-  - 
-  - 
-  - 
+  - CPU
+  - RAM
+  - PCIE
   - 
   - 
   - 
