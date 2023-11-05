@@ -7,16 +7,16 @@ namespace UTKLab
 {
     public class MotherBoard : MonoBehaviour
     {
-        [SerializeField] private Cpu CPU;
-        [SerializeField] private XRSocketInteractor CPUSocketInteractor;
+        [SerializeField] private GameObject CPU;
         [SerializeField] private CpuSocket socket;
-        private void Start()
+        public void AddCpu(SelectEnterEventArgs args)
         {
+            CPU = args.interactorObject.transform.gameObject;
         }
-        public void SelectEn(SelectEnterEventArgs args)
+
+        public void RemoveCpu(SelectExitEventArgs args)
         {
-            //args.interactorObject.
-            Debug.Log("SelectEn");
+            CPU = null;
         }
     }
 }
