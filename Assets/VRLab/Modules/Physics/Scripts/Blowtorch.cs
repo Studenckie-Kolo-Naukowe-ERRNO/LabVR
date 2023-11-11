@@ -9,13 +9,22 @@ namespace PhysicsLab
         [SerializeField] private ParticleSystem fireParticles;
         [SerializeField] private float maxTemp = 100;
         [SerializeField] private float strength = 1;
+        [SerializeField] private AudioSource flameSoundSource;
         bool currentState = false;
         private List<IFlammable> flammables = new List<IFlammable>();
         public void DoFireStuff(bool state)
         {
             currentState = state;
-            if (currentState) fireParticles.Play();
-            else fireParticles.Stop();
+            if (currentState)
+            {
+                fireParticles.Play();
+                flameSoundSource.Play();
+            }
+            else 
+            {
+                fireParticles.Stop();
+                flameSoundSource.Stop();
+            } 
         }
         [ContextMenu("Toggle")]
         public void ToggleFire()
