@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UTKLab
 {
-    [CreateAssetMenu(menuName = "Components/GPU Arch")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Components/GPU Arch")]
     public class GPUArchitecture : ScriptableObject
     {
         [SerializeField] private string architectureName = "Pascal <3";
