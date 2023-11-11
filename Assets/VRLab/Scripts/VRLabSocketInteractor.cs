@@ -8,23 +8,23 @@ namespace UTKLab
     public class VRLabSocketInteractor : XRSocketInteractor
     {
         [Header("Filter PARAMS")]
-        [SerializeField] private CpuSocket socket;
+        [SerializeField] private Connector socket;
 
 
         public override bool CanHover(IXRHoverInteractable interactable)
         {
-            if (interactable is MonoBehaviour gameObject && interactable.transform.TryGetComponent<Cpu>(out Cpu c))
+            if (interactable is MonoBehaviour gameObject && interactable.transform.TryGetComponent<IDevice>(out IDevice c))
             {
-               return (c.GetCpuSocket() == socket && base.CanHover(interactable));
+               return (c.GetDeviceConnector() == socket && base.CanHover(interactable));
             }
             return base.CanHover(interactable);
         }
 
         public override bool CanSelect(IXRSelectInteractable interactable)
         {
-            if (interactable is MonoBehaviour gameObject && interactable.transform.TryGetComponent<Cpu>(out Cpu c))
+            if (interactable is MonoBehaviour gameObject && interactable.transform.TryGetComponent<IDevice>(out IDevice c))
             {
-                return (c.GetCpuSocket() == socket && base.CanSelect(interactable));
+                return (c.GetDeviceConnector() == socket && base.CanSelect(interactable));
             }
             return base.CanSelect(interactable);
         }

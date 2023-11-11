@@ -7,16 +7,33 @@ namespace UTKLab
 {
     public class MotherBoard : MonoBehaviour
     {
-        [SerializeField] private GameObject CPU;
-        [SerializeField] private CpuSocket socket;
+        [Header("Connected components")]
+        [SerializeField] private Cpu CPU;
+        [SerializeField] private List<HardDrive> drives;
         public void AddCpu(SelectEnterEventArgs args)
         {
-            CPU = args.interactorObject.transform.gameObject;
+            Debug.Log(args.interactableObject.transform.name);
+            
+            if (args.interactableObject.transform.TryGetComponent(out Cpu c))
+                CPU = c;
         }
 
         public void RemoveCpu(SelectExitEventArgs args)
         {
-            CPU = null;
+            if (args.interactorObject.transform.gameObject.TryGetComponent(out Cpu c))
+                CPU = null;
+        }
+
+        public void AddDrive(SelectEnterEventArgs args)
+        {
+            if (args.interactorObject.transform.gameObject.TryGetComponent(out HardDrive hd))
+                drives.Add(hd);
+        }
+
+        public void RemoveDrive(SelectExitEventArgs args)
+        {
+            if (args.interactorObject.transform.gameObject.TryGetComponent(out HardDrive hd))
+                drives.Remove(hd);
         }
     }
 }
