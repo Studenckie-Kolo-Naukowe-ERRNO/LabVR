@@ -17,5 +17,9 @@ namespace UTKLab
         {
             return driveData;
         }
+        public int GetDeviceAdditionalValue()
+        {
+            return 0;
+        }
     }
 }

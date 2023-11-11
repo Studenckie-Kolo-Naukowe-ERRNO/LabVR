@@ -40,5 +40,10 @@ namespace UTKLab {
         {
             return cpuSocket;
         }
+
+        public int GetDeviceAdditionalValue()
+        {
+            return 0;
+        }
     }
 }
