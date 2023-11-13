@@ -3,10 +3,17 @@ using System.Xml;
 using TMPro;
 
 public class Translating : MonoBehaviour {
-    public TextAsset xmlFile;
-    public string selectedLanguage = "Polish";
+    [SerializeField] private TextAsset xmlFile;
+    [SerializeField] private GameSettings gameSettings;
+    private string selectedLanguage;
 
-    private void Start() { 
+    private void Start() {
+        LoadLanguage();
+    }
+
+    public void LoadLanguage() {
+        selectedLanguage = gameSettings.language;
+
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(xmlFile.text);
 
