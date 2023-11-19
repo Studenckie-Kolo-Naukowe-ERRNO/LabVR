@@ -31,6 +31,8 @@ namespace GeoLab {
             if (randomValue < getMineralsChance) {
                 LoadMineralsOnScene();
             }
+
+            thisAudioSource = GetComponent<AudioSource>();
         }
 
         private void OnCollisionEnter(Collision collision) 

@@ -23,6 +23,10 @@ namespace PhysicsLab
         private Vector3 swordLastPos;
 
         private AudioSource audioSource;
+        [SerializeField] private AudioClip[] cutSounds;
+        [SerializeField] private AudioClip[] swingSounds;
+        [SerializeField] private float swingDistance;
+        private float swingTime;
         private void Start()
         {
             status = (transform.localScale.y > 0.1f);
@@ -33,7 +37,6 @@ namespace PhysicsLab
         public void Toggle()
         {
             Toggle(!status);
-            Debug.Log($"Sword is {status}");
         }
         public void Toggle(bool activate)
         {
@@ -49,30 +52,38 @@ namespace PhysicsLab
 
         public void FixedUpdate()
         {
-            if (status && Time.time >= cutTime)
+            if (status)
             {
-                
-                bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
-                if (hasHit)
+                if (Time.time >= cutTime)
                 {
-                    GameObject objectToDestory = null;
-                    GameObject targetToSlice = hit.transform.gameObject;
-                    targetToSlice.TryGetComponent(out Tool t);
-                    if(t != null) 
+                    bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
+                    if (hasHit)
                     {
-                        objectToDestory = targetToSlice;
-                        targetToSlice = t.GetThisObjectMesh(); 
+                        GameObject objectToDestory = null;
+                        GameObject targetToSlice = hit.transform.gameObject;
+                        targetToSlice.TryGetComponent(out Tool t);
+                        if (t != null && t.CanBeSliced())
+                        {
+                            objectToDestory = targetToSlice;
+                            targetToSlice = t.GetThisObjectMesh();
+                        }
+                        if ((t != null && t.CanBeSliced()) || t == null)
+                        {
+                            cutTime = Time.time + cutDelay;
+                            Vector3 velocity = (endSlicePoint.position - swordLastPos) / Time.fixedDeltaTime;
+                            Slice(targetToSlice, velocity);
+                        }
+                        if (objectToDestory != null)
+                        {
+                            Destroy(objectToDestory);
+                        }
                     }
-                    if ((t != null && t.CanBeSliced()) || t == null)
-                    {
-                        cutTime = Time.time + cutDelay;
-                        Vector3 velocity = (endSlicePoint.position - swordLastPos) / Time.fixedDeltaTime;
-                        Slice(targetToSlice, velocity);
-                    }
-                    if (objectToDestory != null)
-                    {
-                        Destroy(objectToDestory);
-                    }
+                }
+                if(Time.time >= swingTime && Vector3.Distance(swordLastPos, endSlicePoint.position) > swingDistance)
+                {
+                    swingTime = Time.time + 1;
+                    audioSource.PlayOneShot(swingSounds[Random.Range(0, swingSounds.Length)]);
+                    Debug.Log("Swing");
                 }
             }
 
@@ -81,13 +92,11 @@ namespace PhysicsLab
 
         IEnumerator Sequence(float start, float end)
         {
-            Debug.Log("START");
             float time = 0;
             while (time < 1)
             {
                 time += Time.deltaTime / igniteTime;
                 transform.localScale = new Vector3(1, Mathf.Lerp(start, end, time), 1);
-                Debug.Log(time);
                 yield return null;
             }
         }
@@ -110,6 +119,8 @@ namespace PhysicsLab
                 PreparePiece(lowerHull, pos, rot);
 
                 Destroy(target);
+
+                audioSource.PlayOneShot(cutSounds[Random.Range(0,cutSounds.Length)]);
             }
         }
 

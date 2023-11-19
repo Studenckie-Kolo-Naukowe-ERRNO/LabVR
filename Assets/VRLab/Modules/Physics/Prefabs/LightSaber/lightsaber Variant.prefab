@@ -235,6 +235,28 @@ MonoBehaviour:
   igniteTime: 1
   startSlicePoint: {fileID: 1104855559}
   endSlicePoint: {fileID: 450953605}
+  cutSounds:
+  - {fileID: 8300000, guid: 66ab4d42d67598a438517f72dc3879b7, type: 3}
+  - {fileID: 8300000, guid: bdfa3a12c9e5d7749953a3849e6785a2, type: 3}
+  swingSounds:
+  - {fileID: 8300000, guid: 406974294c8f9764aabae247b29dc205, type: 3}
+  - {fileID: 8300000, guid: b6c1f352f679cf64ba2735fe366fd703, type: 3}
+  - {fileID: 8300000, guid: 127f86bf59a9a8044bb15afc1bc550c0, type: 3}
+  - {fileID: 8300000, guid: fd6df9e854a997d49848b100357a5668, type: 3}
+  - {fileID: 8300000, guid: 081933089c0c45f4e8c2065fd19901e9, type: 3}
+  - {fileID: 8300000, guid: f38f0390e55bd8444afbced1d2251617, type: 3}
+  - {fileID: 8300000, guid: 33f1c25315cccf242b49f1bff6c2d865, type: 3}
+  - {fileID: 8300000, guid: 1a6c8682801ea344c827efdb1bdcd4a4, type: 3}
+  - {fileID: 8300000, guid: 96b4e19249adb014f9d624cd754c4678, type: 3}
+  - {fileID: 8300000, guid: 45a70c42b13646746b62e30542597c48, type: 3}
+  - {fileID: 8300000, guid: f3f359fcbf0df3a4ebd8a34d53553b8b, type: 3}
+  - {fileID: 8300000, guid: 9a4e4b310a096b94da99830fa13caa37, type: 3}
+  - {fileID: 8300000, guid: 9d0e9bce2ca521940a0979c17148cbcb, type: 3}
+  - {fileID: 8300000, guid: 3d1772d0b59fa7b418074433c7b108ae, type: 3}
+  - {fileID: 8300000, guid: f348b61ba4a29e6458a48eb3f2268de5, type: 3}
+  - {fileID: 8300000, guid: 2c2f34d8dab13a648a322bdfdd0278bd, type: 3}
+  - {fileID: 8300000, guid: bec763c658e1447438f89431fea571ed, type: 3}
+  swingDistance: 0.1
 --- !u!82 &5736504317614887426
 AudioSource:
   m_ObjectHideFlags: 0
@@ -246,9 +268,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 16be1eea15d4f7c48a99c5c06bf27bd3,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: dfe8b8c4b4792fb459e392a144ec5181, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7d3a922f73c7d6f438781173afa4b4cf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.025
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
