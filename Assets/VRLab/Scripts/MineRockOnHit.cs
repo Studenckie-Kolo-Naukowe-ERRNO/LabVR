@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GeoLab {
     [RequireComponent(typeof(AudioSource))]
     public class MineRockOnHit : MonoBehaviour {
-        [SerializeField] private Vector3 smallRocksOffest;
+        [SerializeField] private Vector3 smallRocksOffset;
         [SerializeField] private Vector3 smallRocksSize;
         [SerializeField] private float getMineralsChance;
 
@@ -20,6 +20,7 @@ namespace GeoLab {
 
         [SerializeField] private AudioClip[] hitSounds;
         private AudioSource thisAudioSource;
+
         private void Start() {
             toolsLayer = LayerMask.NameToLayer("Tools");
             mineralGameobject = null;
@@ -83,13 +84,13 @@ namespace GeoLab {
 
         private void CreateSmallRocks() {
             foreach (GameObject smallRock in smallRocksGameobject) {
-                smallRock.transform.position = transform.position + smallRocksOffest;
+                smallRock.transform.position = transform.position + smallRocksOffset;
                 smallRock.SetActive(true);
             }
         }
 
         private void CreateMineral() {
-            mineralGameobject.transform.position = transform.position + smallRocksOffest;
+            mineralGameobject.transform.position = transform.position + smallRocksOffset;
             mineralGameobject.SetActive(true);
         }
 

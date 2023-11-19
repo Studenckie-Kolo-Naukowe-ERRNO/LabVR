@@ -10,8 +10,9 @@ namespace PhysicsLab
         [SerializeField] private float maxTemp = 100;
         [SerializeField] private float strength = 1;
         [SerializeField] private AudioSource flameSoundSource;
-        bool currentState = false;
+        private bool currentState = false;
         private List<IFlammable> flammables = new List<IFlammable>();
+
         public void DoFireStuff(bool state)
         {
             currentState = state;
@@ -26,6 +27,7 @@ namespace PhysicsLab
                 flameSoundSource.Stop();
             } 
         }
+
         [ContextMenu("Toggle")]
         public void ToggleFire()
         {
@@ -43,6 +45,7 @@ namespace PhysicsLab
                 DoFireStuff(false);
             }
         }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out IFlammable flammable))
@@ -50,6 +53,7 @@ namespace PhysicsLab
                 flammables.Remove(flammable);
             }
         }
+
         private void FixedUpdate()
         {
             if (!currentState) return;

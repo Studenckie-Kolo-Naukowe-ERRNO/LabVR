@@ -16,7 +16,7 @@ namespace PhysicsLab
 
         [SerializeField] private float igniteTime = 1f;
         private Coroutine seq;
-        bool status = false;
+        private bool status = false;
 
         [SerializeField] private Transform startSlicePoint;
         [SerializeField] private Transform endSlicePoint;
@@ -27,6 +27,7 @@ namespace PhysicsLab
         [SerializeField] private AudioClip[] swingSounds;
         [SerializeField] private float swingDistance;
         private float swingTime;
+        
         private void Start()
         {
             status = (transform.localScale.y > 0.1f);
@@ -38,6 +39,7 @@ namespace PhysicsLab
         {
             Toggle(!status);
         }
+
         public void Toggle(bool activate)
         {
             if (status == activate) return;
@@ -59,12 +61,15 @@ namespace PhysicsLab
                     bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
                     if (hasHit)
                     {
+
                         GameObject objectToDestory = null;
-                        GameObject targetToSlice = hit.transform.gameObject;
+            GameObject targetToSlice = hit.transform.gameObject;
                         targetToSlice.TryGetComponent(out Tool t);
                         if (t != null && t.CanBeSliced())
                         {
+
                             objectToDestory = targetToSlice;
+
                             targetToSlice = t.GetThisObjectMesh();
                         }
                         if ((t != null && t.CanBeSliced()) || t == null)
@@ -73,6 +78,7 @@ namespace PhysicsLab
                             Vector3 velocity = (endSlicePoint.position - swordLastPos) / Time.fixedDeltaTime;
                             Slice(targetToSlice, velocity);
                         }
+                        
                         if (objectToDestory != null)
                         {
                             Destroy(objectToDestory);

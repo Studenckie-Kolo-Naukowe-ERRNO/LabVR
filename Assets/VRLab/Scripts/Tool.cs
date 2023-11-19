@@ -12,7 +12,7 @@ namespace VRLabEssentials
         [Header("Item")]
         [SerializeField] private ItemData data;
         [SerializeField] private bool canBeSliced;
-        [SerializeField] private GameObject thisObiectMesh;
+        [SerializeField] private GameObject thisObjectMesh;
         [Header("Effects")]
         [SerializeField] protected AudioClip pickSound;
         [SerializeField] protected AudioClip useSound;
@@ -32,9 +32,10 @@ namespace VRLabEssentials
             rb = GetComponent<Rigidbody>();
             itemAudioSource = GetComponent<AudioSource>();
         }
+
         private void Update()
         {
-            if (IsHolded())
+            if (IsHeld())
             {
                 InHand.Invoke();
             }
@@ -71,6 +72,7 @@ namespace VRLabEssentials
             if(useSound != null) itemAudioSource.PlayOneShot(useSound);
             base.OnActivated(args);
         }
+
         public ItemData GetItemData()
         {
             return data;
@@ -80,11 +82,13 @@ namespace VRLabEssentials
         {
             return this.gameObject;
         }
+
         public bool CanBeSliced()
         {
-            return canBeSliced && !IsHolded();
+            return canBeSliced && !IsHeld();
         }
-        public bool IsHolded()
+
+        public bool IsHeld()
         {
             return inHands > 0;
         }
@@ -102,7 +106,7 @@ namespace VRLabEssentials
         private void UpdateMassCenter()
         {
             if (rb == null) return;
-            if (IsHolded())
+            if (IsHeld())
             {
                 SetParentToXRRig();
                 rb.centerOfMass = Vector3.zero;
@@ -117,13 +121,13 @@ namespace VRLabEssentials
 
         public GameObject GetThisObjectMesh()
         {
-            if (thisObiectMesh == null) return ThisObject();
-            else return thisObiectMesh;
+            if (thisObjectMesh == null) return ThisObject();
+            else return thisObjectMesh;
         }
 
         public void SetThisObjectMesh(GameObject newMesh)
         {
-            thisObiectMesh = newMesh;
+            thisObjectMesh = newMesh;
         }
     }
 }
