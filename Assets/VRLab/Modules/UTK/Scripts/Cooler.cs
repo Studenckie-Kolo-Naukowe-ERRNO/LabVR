@@ -8,16 +8,23 @@ namespace UTKLab
     public class Cooler : MonoBehaviour
     {
         [Tooltip("TDP in W")]
-        [SerializeField] private int TDP;
+        [SerializeField] private int coolingCapacity;
+        [Tooltip("Power usage")]
+        [SerializeField] private int powerUsage;
         public enum type
         {
             Pasywne,
             Aktywne,
             Wodne
         }
-        public int Cooling()
+
+        public int GetCoolingCapacity()
         {
-            return TDP;
+            return coolingCapacity;
+        }
+        public int GetPowerUsage()
+        {
+            return powerUsage;
         }
     }
 }
