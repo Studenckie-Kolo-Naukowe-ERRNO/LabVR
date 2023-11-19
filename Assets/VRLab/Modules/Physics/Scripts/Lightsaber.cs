@@ -27,7 +27,7 @@ namespace PhysicsLab
         [SerializeField] private AudioClip[] swingSounds;
         [SerializeField] private float swingDistance;
         private float swingTime;
-
+        
         private void Start()
         {
             status = (transform.localScale.y > 0.1f);
@@ -61,12 +61,15 @@ namespace PhysicsLab
                     bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
                     if (hasHit)
                     {
-                        GameObject objectToDestroy = null;
-                        GameObject targetToSlice = hit.transform.gameObject;
+
+                        GameObject objectToDestory = null;
+            GameObject targetToSlice = hit.transform.gameObject;
                         targetToSlice.TryGetComponent(out Tool t);
                         if (t != null && t.CanBeSliced())
                         {
-                            objectToDestroy = targetToSlice;
+
+                            objectToDestory = targetToSlice;
+
                             targetToSlice = t.GetThisObjectMesh();
                         }
                         if ((t != null && t.CanBeSliced()) || t == null)
@@ -75,13 +78,14 @@ namespace PhysicsLab
                             Vector3 velocity = (endSlicePoint.position - swordLastPos) / Time.fixedDeltaTime;
                             Slice(targetToSlice, velocity);
                         }
-                        if (objectToDestroy != null)
+                        
+                        if (objectToDestory != null)
                         {
-                            Destroy(objectToDestroy);
+                            Destroy(objectToDestory);
                         }
                     }
                 }
-                if (Time.time >= swingTime && Vector3.Distance(swordLastPos, endSlicePoint.position) > swingDistance)
+                if(Time.time >= swingTime && Vector3.Distance(swordLastPos, endSlicePoint.position) > swingDistance)
                 {
                     swingTime = Time.time + 1;
                     audioSource.PlayOneShot(swingSounds[Random.Range(0, swingSounds.Length)]);
