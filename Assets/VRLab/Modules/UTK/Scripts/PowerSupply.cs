@@ -6,7 +6,6 @@ namespace UTKLab
 {
     public class PowerSupply : MonoBehaviour
     {
-        //zmienne
         [Tooltip("Power in W")]
         [SerializeField] private int power;
         public enum Certificate
@@ -19,7 +18,7 @@ namespace UTKLab
         }
         [Tooltip("Energetic Certificate")]
         [SerializeField] private Certificate certificate;
-        //Obliczenia
+
         public int OutputPower()
         {
             return (int)(power * ((int)certificate / 100));
