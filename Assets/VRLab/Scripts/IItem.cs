@@ -9,7 +9,7 @@ namespace VRLabEssentials
         public GameObject ThisObject();
         public GameObject GetThisObjectMesh();
         public void SetThisObjectMesh(GameObject newMesh);
-        public bool IsHolded();
+        public bool IsHeld();
 
         public bool CanBeSliced();
     }
