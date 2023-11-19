@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace GeoLab {
+    [RequireComponent(typeof(AudioSource))]
     public class MineRockOnHit : MonoBehaviour {
-        [SerializeField] private Vector3 smallRocksOffest;
+        [SerializeField] private Vector3 smallRocksOffset;
         [SerializeField] private Vector3 smallRocksSize;
         [SerializeField] private float getMineralsChance;
 
@@ -16,6 +18,9 @@ namespace GeoLab {
         private GameObject mineralGameobject;
         private int toolsLayer;
 
+        [SerializeField] private AudioClip[] hitSounds;
+        private AudioSource thisAudioSource;
+
         private void Start() {
             toolsLayer = LayerMask.NameToLayer("Tools");
             mineralGameobject = null;
@@ -27,14 +32,21 @@ namespace GeoLab {
             if (randomValue < getMineralsChance) {
                 LoadMineralsOnScene();
             }
+
+            thisAudioSource = GetComponent<AudioSource>();
         }
 
-        private void OnCollisionEnter(Collision collision) {
-            if (collision.gameObject.layer == toolsLayer) {
+        private void OnCollisionEnter(Collision collision) 
+        {
+            if (collision.gameObject.layer == toolsLayer) 
+            {
                 Vector3 collisionForce = collision.impulse / Time.fixedDeltaTime;
                 health -= collisionForce.magnitude;
 
-                if (health <= 0) {
+                thisAudioSource.PlayOneShot(RandomHitClip());
+
+                if (health <= 0) 
+                {
                     DestroyTheRock();
                 }
             }
@@ -72,14 +84,19 @@ namespace GeoLab {
 
         private void CreateSmallRocks() {
             foreach (GameObject smallRock in smallRocksGameobject) {
-                smallRock.transform.position = transform.position + smallRocksOffest;
+                smallRock.transform.position = transform.position + smallRocksOffset;
                 smallRock.SetActive(true);
             }
         }
 
         private void CreateMineral() {
-            mineralGameobject.transform.position = transform.position + smallRocksOffest;
+            mineralGameobject.transform.position = transform.position + smallRocksOffset;
             mineralGameobject.SetActive(true);
+        }
+
+        private AudioClip RandomHitClip()
+        {
+            return hitSounds[Random.Range(0, hitSounds.Length)];
         }
     }
 }
