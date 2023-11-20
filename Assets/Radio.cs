@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Radio : MonoBehaviour {
-    [NonReorderable] public List<RadioChannels> channels = new List<RadioChannels>();
+    [NonReorderable, SerializeField] private List<RadioChannels> channels = new List<RadioChannels>();
     private int channelSelected = 0;
     private AudioSource audioSource;
 
@@ -15,7 +13,7 @@ public class Radio : MonoBehaviour {
 
     private void Start() {
         foreach (RadioChannels channel in channels) {
-            StartCoroutine(channel.PlayMusicInTheBackground(audioSource));
+            StartCoroutine(channel.PlayMusicCoroutine(audioSource));
             StartCoroutine(channel.CountSeconds());
         }
     }
@@ -23,18 +21,14 @@ public class Radio : MonoBehaviour {
     [ContextMenu("Switch channel or Turn on the radio")]
     public void OnRadioStationChange() {
         foreach (RadioChannels channel in channels) {
-            channel.isPlaying = false;
+            channel.channelIsPlaying = false;
         }
+        channels[channelSelected].channelIsPlaying = true;
 
-        channels[channelSelected].isPlaying = true;
-
-        audioSource.Stop();
-        audioSource.clip = channels[channelSelected].music[channels[channelSelected].playingSongIndex];
+        channels[channelSelected].PlayMusic(audioSource);
         audioSource.time = channels[channelSelected].secondsPlayed;
-        audioSource.Play();
 
         channelSelected++;
-
         if (channelSelected >= channels.Count) { 
             channelSelected = 0; 
         }
@@ -45,9 +39,9 @@ public class Radio : MonoBehaviour {
 [System.Serializable]
 public class RadioChannels {
     public AudioClip[] music;
-    [HideInInspector] public int playingSongIndex = 0;
     [HideInInspector] public ulong secondsPlayed = 0;
-    [HideInInspector] public bool isPlaying = false;
+    private int playingSongIndex = 0;
+    [HideInInspector] public bool channelIsPlaying = false;
 
     public void GetRandomSong() {
         int randomSong = Random.Range(0, music.Length - 1);
@@ -58,7 +52,6 @@ public class RadioChannels {
             } else {
                 randomSong--;
             }
-
         }
 
         playingSongIndex = randomSong;
@@ -68,15 +61,14 @@ public class RadioChannels {
         return music[playingSongIndex].length;
     }
 
-    public IEnumerator PlayMusicInTheBackground(AudioSource audioSource) {
+    public IEnumerator PlayMusicCoroutine(AudioSource audioSource) {
         while (true) {
             secondsPlayed = 0;
-
             yield return new WaitForSeconds(GetTheSongLength());
-            if (isPlaying) {
+
+            if (channelIsPlaying) {
                 GetRandomSong();
-                audioSource.clip = music[playingSongIndex];
-                audioSource.Play();
+                PlayMusic(audioSource);
             }
         }
     }
@@ -86,5 +78,10 @@ public class RadioChannels {
             yield return new WaitForSeconds(1);
             secondsPlayed++;
         }
+    }
+
+    public void PlayMusic(AudioSource audioSource) {
+        audioSource.clip = music[playingSongIndex];
+        audioSource.Play();
     }
 }
