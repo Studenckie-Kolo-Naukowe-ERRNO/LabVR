@@ -10,4 +10,9 @@ public class Tablet : MonoBehaviour {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
+
+    [ContextMenu("Return To Hub")]
+    public void ReturnToHub() {
+        SceneManager.LoadScene(0);
+    }
 }
