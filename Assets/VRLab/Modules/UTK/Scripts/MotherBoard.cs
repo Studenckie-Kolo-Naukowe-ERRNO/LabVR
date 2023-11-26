@@ -19,6 +19,7 @@ namespace UTKLab
         {
             PowerMotherboard(true);
         }
+        
         [ContextMenu("Power motherboard off")]
         public void PowerMotherboardOff()
         {
@@ -60,7 +61,10 @@ namespace UTKLab
 
             return true;
         }
-
+        public bool IsPoweredOn()
+        {
+            return isPowered;
+        }
 
         //TO-DO
         //Tja, pora na generic types, ale na razie mi sie nie chce
