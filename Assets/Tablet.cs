@@ -15,4 +15,9 @@ public class Tablet : MonoBehaviour {
     public void ReturnToHub() {
         SceneManager.LoadScene(0);
     }
+
+    public void ChangeGraphicLevel(int level) {
+        level = Mathf.Clamp(level, 0, QualitySettings.names.Length - 1);
+        QualitySettings.SetQualityLevel(level, true);
+    }
 }
