@@ -13,22 +13,28 @@ namespace UTKLab
         public void AddMotherboard(SelectEnterEventArgs args)
         {
             if (args.interactableObject.transform.TryGetComponent(out MotherBoard m))
+            {
+                mb.PowerMotherboard(false);
                 mb = m;
+            }
         }
 
         public void RemoveMotherboard(SelectExitEventArgs args)
         {
             if (args.interactableObject.transform.TryGetComponent(out MotherBoard m))
+            {
+                mb.PowerMotherboard(false);
                 mb = null;
+            }
         }
 
         public void PowerButtonAction()
         {
-            if(mb != null && Time.time >= buttonClickTime)
+            Debug.Log("Clicked power button");
+            if (mb != null && Time.time >= buttonClickTime)
             {
                 mb.PowerMotherboard(!mb.IsPoweredOn());
-                buttonClickTime = Time.time + buttonTimeLimit;
-                Debug.Log("Clicked power button");
+                buttonClickTime = Time.time + buttonTimeLimit; 
             }
         }
     }

@@ -66,54 +66,78 @@ namespace UTKLab
             return isPowered;
         }
 
-        //TO-DO
-        //Tja, pora na generic types, ale na razie mi sie nie chce
         public void AddCpu(SelectEnterEventArgs args)
         {
-            if (args.interactableObject.transform.TryGetComponent(out Cpu c))
+            if (args.interactableObject.transform.TryGetComponent(out Cpu c)) 
+            {
+                PowerMotherboard(false);
                 CPU = c;
+            }
+
+                
         }
 
         public void RemoveCpu(SelectExitEventArgs args)
         {
             if (args.interactableObject.transform.gameObject.TryGetComponent(out Cpu c))
+            {
+                PowerMotherboard(false);
                 CPU = null;
+            }
         }
 
         public void AddDrive(SelectEnterEventArgs args)
         {
             if (args.interactableObject.transform.gameObject.TryGetComponent(out HardDrive hd))
+            {
+                PowerMotherboard(false);
                 drives.Add(hd);
+            }
         }
 
         public void RemoveDrive(SelectExitEventArgs args)
         {
             if (args.interactableObject.transform.gameObject.TryGetComponent(out HardDrive hd))
+            {
+                PowerMotherboard(false);
                 drives.Remove(hd);
+            }
         }
 
         public void AddPCIeDevice(SelectEnterEventArgs args)
         {
             if (args.interactableObject.transform.gameObject.TryGetComponent(out GPU gpu))
+            {
+                PowerMotherboard(false);
                 graphicCards.Add(gpu);
+            }
         }
 
         public void RemovePCIeDevice(SelectExitEventArgs args)
         {
             if (args.interactableObject.transform.gameObject.TryGetComponent(out GPU gpu))
+            {
+                PowerMotherboard(false);
                 graphicCards.Remove(gpu);
+            }
         }
 
         public void AddRAMModule(SelectEnterEventArgs args)
         {
             if (args.interactableObject.transform.gameObject.TryGetComponent(out RAMStick module))
+            {
+                PowerMotherboard(false);
                 memoryModules.Add(module);
+            }
         }
 
         public void RemoveRAMModule(SelectExitEventArgs args)
         {
             if (args.interactableObject.transform.gameObject.TryGetComponent(out RAMStick module))
+            {
+                PowerMotherboard(false);
                 memoryModules.Remove(module);
+            }
         }
    
     }
