@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwitchPage : MonoBehaviour {
@@ -9,11 +10,9 @@ public class SwitchPage : MonoBehaviour {
 
     private void Start() {
         nextPageStartingPos = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 0);
-        //StartCoroutine(SwapPage());
     }
 
     public void SwitchRight() {
-        //pages[currentPage].SetActive(false);
         currentPage++;
         if (currentPage >= pages.Length) currentPage = 0;
         SwapAnimation();
@@ -29,8 +28,6 @@ public class SwitchPage : MonoBehaviour {
     private void SwapAnimation() {
         pages[currentPage].GetComponent<RectTransform>().anchoredPosition = nextPageStartingPos;
         StartCoroutine(SwapPage());
-
-
     }
 
     IEnumerator SwapPage() {
@@ -40,5 +37,7 @@ public class SwitchPage : MonoBehaviour {
                 page.transform.position -= new Vector3(10,0,0);
             }
         }
+
+        pages[currentPage].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 }
