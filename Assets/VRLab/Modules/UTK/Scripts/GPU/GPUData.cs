@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UTKLab 
 {
-    [CreateAssetMenu(menuName = "Components/GPU")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Components/GPU")]
     public class GPUData : ScriptableObject
     {
         ///Do obliczen///
@@ -14,6 +14,7 @@ namespace UTKLab
         ///Benchmark///
         [SerializeField] private GPUArchitecture architecture;
         ///Dodatki///
+        [SerializeField] private Connector connector;
         [SerializeField] private uint GenPCIE;
         [SerializeField] private uint PCIELanes;
         [SerializeField] private uint memoryClock;  //Taktowanie pamieci (MHz)
@@ -36,6 +37,10 @@ namespace UTKLab
         public int PerformanceSCORE() 
         {
             return (int)(PerformanceTFLOPS() * architecture.GetTFLOPScore());
+        }
+        public Connector GetCardConnector()
+        {
+            return connector;
         }
     }
 }

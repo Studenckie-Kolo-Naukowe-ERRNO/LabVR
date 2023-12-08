@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UTKLab {
-    public class Cpu : MonoBehaviour {
+    public class Cpu : MonoBehaviour, IDevice {
 
         [Header("Scriptable Objects")]
         [SerializeField] private CpuArchitecture cpuArchitecture;
-        [SerializeField] private CpuSocket cpuSocket;
+        [SerializeField] private Connector cpuSocket;
 
         [Header("CPU specifications")]
         [SerializeField] private bool unlockedMultiplier;
@@ -31,6 +31,19 @@ namespace UTKLab {
         private float MultiThreadPerformance() {
             return clockRate * cpuArchitecture.ipc * threads * cpuArchitecture.multiThreadMultipiler;
         }
+        public Connector GetCpuSocket()
+        {
+            return cpuSocket;
+        }
 
+        public Connector GetDeviceConnector()
+        {
+            return cpuSocket;
+        }
+
+        public int GetDeviceAdditionalValue()
+        {
+            return 0;
+        }
     }
 }
