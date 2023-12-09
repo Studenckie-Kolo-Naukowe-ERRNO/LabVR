@@ -7,9 +7,17 @@ public class SwitchPage : MonoBehaviour {
     [SerializeField] private GameObject[] pages;
     private int currentPage = 0;
     private Vector2 nextPageStartingPos;
+    [SerializeField] private GameObject arrowLeft;
+    [SerializeField] private GameObject arrowRight;
 
     private void Start() {
         nextPageStartingPos = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 0);
+
+        if (pages.Length == 0 || pages.Length == 1) {
+            Debug.LogWarning("No pages added");
+            arrowLeft.SetActive(false);
+            arrowRight.SetActive(false);
+        }
     }
 
     public void SwitchRight() {
@@ -20,8 +28,9 @@ public class SwitchPage : MonoBehaviour {
     }       
     
     public void SwitchLeft() {
-        pages[currentPage].SetActive(false);
+        //pages[currentPage].SetActive(false);
         currentPage--;
+        if (currentPage < 0) currentPage = pages.Length-1;
         pages[currentPage].SetActive(true);
     }
 

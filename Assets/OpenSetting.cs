@@ -8,20 +8,21 @@ public class OpenSetting : MonoBehaviour {
     public GridLayoutGroup gridLayoutGroup;
     public float duration;
     public float duration2;
-    public Vector2 startingSize;
-    public Vector2 startingPos;
+    private Vector2 startingSize;
+    private Vector2 startingPos;
     private GameObject lastOpenedTab;
 
     public void OpenTab(GameObject setting) {
         lastOpenedTab = setting;
         startingPos = setting.GetComponent<RectTransform>().anchoredPosition;
+        startingSize = setting.GetComponent<RectTransform>().sizeDelta;
+
         gridLayoutGroup.enabled = false;
         StartCoroutine(OpenSettingAnimation(setting));
     }
 
     public void CloseTab() {
         StartCoroutine(CloseSettingAnimation());
-        //lastOpenedTab = null;
     }
 
     IEnumerator OpenSettingAnimation(GameObject setting) {
