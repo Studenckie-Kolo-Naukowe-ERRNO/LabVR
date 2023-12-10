@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class OpenSetting : MonoBehaviour {
     [SerializeField] private float resizeIconSpeed;
     [SerializeField] private float centreIconSpeed;
+    [SerializeField] private GameObject closeBtn;
     private GridLayoutGroup gridLayoutGroup;
     private Vector2 startingSize;
     private Vector2 startingPos;
@@ -23,6 +24,8 @@ public class OpenSetting : MonoBehaviour {
         iconGameObject.GetComponent<Button>().enabled = false;
 
         gridLayoutGroup.enabled = false;
+        closeBtn.SetActive(true);
+
         StartCoroutine(ToggleSettingAnimation(
             iconGameObject, 
             openedTabSize, 
@@ -58,6 +61,7 @@ public class OpenSetting : MonoBehaviour {
             false
         ));
 
+        closeBtn.SetActive(false);
     }
 
     IEnumerator ToggleSettingAnimation(GameObject iconGameObject, 
