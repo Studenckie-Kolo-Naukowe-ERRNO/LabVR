@@ -32,7 +32,6 @@ public class Tablet : MonoBehaviour {
     public void ChangeGraphicLevel(GameObject btn) {
         graphicsLevelIndex++;
         if (graphicsLevelIndex >= QualitySettings.names.Length) graphicsLevelIndex = 0;
-        //level = Mathf.Clamp(level, 0, QualitySettings.names.Length - 1);
         QualitySettings.SetQualityLevel(graphicsLevelIndex, true);
         btn.GetComponentInChildren<TextMeshProUGUI>().SetText(QualitySettings.names[graphicsLevelIndex]);
     }
