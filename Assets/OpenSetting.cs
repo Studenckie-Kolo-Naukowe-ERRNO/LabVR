@@ -1,70 +1,78 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class OpenSetting : MonoBehaviour {
-    public GridLayoutGroup gridLayoutGroup;
-    public float duration;
-    public float duration2;
+    [SerializeField] private float resizeIconSpeed;
+    [SerializeField] private float centreIconSpeed;
+    private GridLayoutGroup gridLayoutGroup;
     private Vector2 startingSize;
     private Vector2 startingPos;
+    private Vector2 openedTabSize;
     private GameObject lastOpenedTab;
 
-    public void OpenTab(GameObject setting) {
-        lastOpenedTab = setting;
-        startingPos = setting.GetComponent<RectTransform>().anchoredPosition;
-        startingSize = setting.GetComponent<RectTransform>().sizeDelta;
+    private void Start() {
+        gridLayoutGroup = GetComponent<GridLayoutGroup>();
+        openedTabSize = GetComponent<RectTransform>().sizeDelta;
+    }
+
+    public void OpenTab(GameObject iconGameObject) {
+        lastOpenedTab = iconGameObject;
+        startingPos = iconGameObject.GetComponent<RectTransform>().localPosition;
+        startingSize = iconGameObject.GetComponent<RectTransform>().sizeDelta;
+        iconGameObject.GetComponent<Button>().enabled = false;
 
         gridLayoutGroup.enabled = false;
-        StartCoroutine(OpenSettingAnimation(setting));
+        StartCoroutine(ToggleSettingAnimation(
+            iconGameObject, 
+            openedTabSize, 
+            Vector2.zero, 
+            false, 
+            false
+        ));
     }
 
     public void CloseTab() {
-        StartCoroutine(CloseSettingAnimation());
+        StartCoroutine(ToggleSettingAnimation(
+            lastOpenedTab, 
+            startingSize, 
+            startingPos, 
+            true, 
+            true
+        ));
     }
 
-    IEnumerator OpenSettingAnimation(GameObject setting) {
-        Vector2 originalSize = setting.GetComponent<RectTransform>().sizeDelta;
-        Vector2 targetSize = GetComponent<RectTransform>().sizeDelta;
+    IEnumerator ToggleSettingAnimation(GameObject iconGameObject, 
+        Vector2 finalSize, Vector2 finalPos, 
+        bool gridEnabled, bool btnEnabled) {
+
+        Vector2 originalSize = iconGameObject.GetComponent<RectTransform>().sizeDelta;
+        RectTransform rectTransform = iconGameObject.GetComponent<RectTransform>();
 
         float startTime = Time.time;
 
-        while (setting.GetComponent<RectTransform>().sizeDelta != targetSize) {
-            float progress = (Time.time - startTime) / duration;
+        while (rectTransform.sizeDelta != finalSize) {
+            float progress = (Time.time - startTime) / resizeIconSpeed;
 
-            setting.GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(originalSize, targetSize, progress);
+            rectTransform.sizeDelta = Vector2.Lerp(
+                originalSize, 
+                finalSize, 
+                progress
+            );
 
-            setting.GetComponent<RectTransform>().localPosition = Vector2.Lerp(setting.GetComponent<RectTransform>().localPosition, Vector2.zero, duration2);
+            rectTransform.localPosition = Vector2.Lerp(
+                rectTransform.localPosition, 
+                finalPos, 
+                centreIconSpeed
+            );
 
             yield return null;
         }
 
-        setting.GetComponent<RectTransform>().localPosition = Vector2.zero;
+        rectTransform.localPosition = finalPos;
+        gridLayoutGroup.enabled = gridEnabled;
+        iconGameObject.GetComponent<Button>().enabled = btnEnabled;
     }
 
-    IEnumerator CloseSettingAnimation() {
-        Vector2 originalSize = lastOpenedTab.GetComponent<RectTransform>().sizeDelta;
-        Vector2 targetSize = startingSize;
-
-        float startTime = Time.time;
-
-        while (lastOpenedTab.GetComponent<RectTransform>().sizeDelta != targetSize) {
-            float progress = (Time.time - startTime) / duration;
-            float progress2 = (Time.time - startTime) / duration2;
-
-            lastOpenedTab.GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(originalSize, targetSize, progress);
-
-            lastOpenedTab.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(lastOpenedTab.GetComponent<RectTransform>().anchoredPosition, startingPos, duration2);
-
-            yield return null;
-        }
-
-        lastOpenedTab.GetComponent<RectTransform>().anchoredPosition = startingPos;
-
-        gridLayoutGroup.enabled = true;
-
-    }
 }
 

@@ -75,11 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36093d1febd855a428ab6082596cc528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridLayoutGroup: {fileID: 0}
-  duration: 0.18
-  duration2: 0.03
-  startingSize: {x: 0, y: 0}
-  startingPos: {x: 0, y: 0}
+  resizeIconSpeed: 0.18
+  centreIconSpeed: 0.03
 --- !u!1 &7294946141637020128
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
