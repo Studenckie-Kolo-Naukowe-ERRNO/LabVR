@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class SwitchPage : MonoBehaviour {
     [SerializeField] private GameObject[] pages;
+    [SerializeField] private GameObject arrowLeft;
+    [SerializeField] private GameObject arrowRight;
     private int currentPage = 0;
     private Vector2 nextPageStartingPosRight;
     private Vector2 nextPageStartingPosLeft;
-    [SerializeField] private GameObject arrowLeft;
-    [SerializeField] private GameObject arrowRight;
 
     private void Start() {
         nextPageStartingPosRight = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 0);
@@ -22,39 +22,37 @@ public class SwitchPage : MonoBehaviour {
         }
     }
 
+    private bool ShouldContinueMoving(int direction) {
+        RectTransform currentPageRect = pages[currentPage].GetComponent<RectTransform>();
+        return (currentPageRect.anchoredPosition.x >= 0 && direction == -1) ||
+               (currentPageRect.anchoredPosition.x <= 0 && direction == 1);
+    }
+
     public void SwitchRight() {
         currentPage++;
         if (currentPage >= pages.Length) currentPage = 0;
         pages[currentPage].GetComponent<RectTransform>().anchoredPosition = nextPageStartingPosRight;
-        StartCoroutine(SwapPageRight());
+
+        StartCoroutine(SwapPage(-1));
         pages[currentPage].SetActive(true);
     }       
     
     public void SwitchLeft() {
-        //pages[currentPage].SetActive(false);
         currentPage--;
         if (currentPage < 0) currentPage = pages.Length-1;
         pages[currentPage].GetComponent<RectTransform>().anchoredPosition = nextPageStartingPosLeft;
-        StartCoroutine(SwapPageLeft());
+
+        StartCoroutine(SwapPage(1));
         pages[currentPage].SetActive(true);
     }
 
-    IEnumerator SwapPageRight() {
-        while (pages[currentPage].GetComponent<RectTransform>().anchoredPosition.x >= 0) {
+    IEnumerator SwapPage(int direction) {
+        Vector2 pagePos = pages[currentPage].GetComponent<RectTransform>().anchoredPosition;
+
+        while (ShouldContinueMoving(direction)) {
             yield return new WaitForSeconds(0.01f);
             foreach (GameObject page in pages) {
-                page.transform.position -= new Vector3(10,0,0);
-            }
-        }
-
-        pages[currentPage].GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-    }
-
-    IEnumerator SwapPageLeft() {
-        while (pages[currentPage].GetComponent<RectTransform>().anchoredPosition.x <= 0) {
-            yield return new WaitForSeconds(0.01f);
-            foreach (GameObject page in pages) {
-                page.transform.position += new Vector3(10, 0, 0);
+                page.transform.position += new Vector3(direction * 10, 0, 0);
             }
         }
 
