@@ -28,23 +28,41 @@ public class OpenSetting : MonoBehaviour {
             openedTabSize, 
             Vector2.zero, 
             false, 
-            false
+            false,
+            true
         ));
+        
+        for (int i = 0; i < transform.childCount - 1; i++) {
+            if (transform.GetChild(i).gameObject != lastOpenedTab) {
+                transform.GetChild(i).gameObject.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void CloseTab() {
+
+        foreach (Transform settings in lastOpenedTab.transform) {
+            settings.gameObject.SetActive(false);
+        }
+
+        foreach (Transform icon in transform) {
+            icon.gameObject.SetActive(true);
+        }
+
         StartCoroutine(ToggleSettingAnimation(
             lastOpenedTab, 
             startingSize, 
             startingPos, 
             true, 
-            true
+            true,
+            false
         ));
+
     }
 
     IEnumerator ToggleSettingAnimation(GameObject iconGameObject, 
         Vector2 finalSize, Vector2 finalPos, 
-        bool gridEnabled, bool btnEnabled) {
+        bool gridEnabled, bool btnEnabled, bool settingsEnabled) {
 
         Vector2 originalSize = iconGameObject.GetComponent<RectTransform>().sizeDelta;
         RectTransform rectTransform = iconGameObject.GetComponent<RectTransform>();
@@ -72,6 +90,10 @@ public class OpenSetting : MonoBehaviour {
         rectTransform.localPosition = finalPos;
         gridLayoutGroup.enabled = gridEnabled;
         iconGameObject.GetComponent<Button>().enabled = btnEnabled;
+
+        foreach (Transform settings in iconGameObject.transform) {
+            settings.gameObject.SetActive(settingsEnabled);
+        }
     }
 
 }
