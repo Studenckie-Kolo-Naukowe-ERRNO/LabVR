@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,15 @@ using UnityEngine.SceneManagement;
 public class Tablet : MonoBehaviour {
     [SerializeField] private AudioMixer effectsVolume;
     [SerializeField] private AudioMixer musicVolume;
+    private int graphicsLevelIndex = 0;
+
+    private void Start() {
+        SetupGraphicsChangingBtn();
+    }
+
+    private void SetupGraphicsChangingBtn() {
+        QualitySettings.SetQualityLevel(graphicsLevelIndex, true);
+    }
 
     [ContextMenu("Restart The Level")]
     public void RestartTheLevel() {
@@ -19,9 +29,12 @@ public class Tablet : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
-    public void ChangeGraphicLevel(int level) {
-        level = Mathf.Clamp(level, 0, QualitySettings.names.Length - 1);
-        QualitySettings.SetQualityLevel(level, true);
+    public void ChangeGraphicLevel(GameObject btn) {
+        graphicsLevelIndex++;
+        if (graphicsLevelIndex >= QualitySettings.names.Length) graphicsLevelIndex = 0;
+        //level = Mathf.Clamp(level, 0, QualitySettings.names.Length - 1);
+        QualitySettings.SetQualityLevel(graphicsLevelIndex, true);
+        btn.GetComponentInChildren<TextMeshProUGUI>().SetText(QualitySettings.names[graphicsLevelIndex]);
     }
 
     public void SetEffectVolume(float sliderValue) {
