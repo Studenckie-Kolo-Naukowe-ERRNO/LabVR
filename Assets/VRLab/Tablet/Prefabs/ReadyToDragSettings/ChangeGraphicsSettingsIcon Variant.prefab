@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 506026002}
   - component: {fileID: 506026001}
   m_Layer: 5
-  m_Name: Graphic
+  m_Name: GraphicBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
