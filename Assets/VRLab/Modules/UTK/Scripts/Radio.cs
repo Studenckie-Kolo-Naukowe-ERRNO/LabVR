@@ -21,12 +21,12 @@ public class Radio : MonoBehaviour {
     [ContextMenu("Switch channel or Turn on the radio")]
     public void OnRadioStationChange() {
         foreach (RadioChannels channel in channels) {
-            channel.channelIsPlaying = false;
+            channel.SetChannelIsPlaying(false);
         }
-        channels[channelSelected].channelIsPlaying = true;
+        channels[channelSelected].SetChannelIsPlaying(true);
 
         channels[channelSelected].PlayMusic(audioSource);
-        audioSource.time = channels[channelSelected].secondsPlayed;
+        audioSource.time = channels[channelSelected].GetSecondsPlayed();
 
         channelSelected++;
         if (channelSelected >= channels.Count) { 
@@ -39,9 +39,17 @@ public class Radio : MonoBehaviour {
 [System.Serializable]
 public class RadioChannels {
     public AudioClip[] music;
-    [HideInInspector] public ulong secondsPlayed = 0;
+    private ulong secondsPlayed = 0;
     private int playingSongIndex = 0;
-    [HideInInspector] public bool channelIsPlaying = false;
+    private bool channelIsPlaying = false;
+
+    public ulong GetSecondsPlayed() {
+        return secondsPlayed;
+    }
+
+    public void SetChannelIsPlaying(bool state) {
+        channelIsPlaying = state;
+    }
 
     public void GetRandomSong() {
         int randomSong = Random.Range(0, music.Length - 1);
