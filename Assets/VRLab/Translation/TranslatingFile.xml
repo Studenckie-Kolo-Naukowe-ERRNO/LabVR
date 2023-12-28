@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<languages>
+
+	<English>
+		
+		<string name="Btn1">This is english</string>
+		<string name="Btn2">Click me</string>
+		
+	</English>
+
+	<Polish>
+
+		<string name="Btn1">To jest polski</string>
+		<string name="Btn2">Kliknij mnie</string>
+		
+	</Polish>
+	
+</languages>

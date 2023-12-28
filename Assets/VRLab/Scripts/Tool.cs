@@ -5,18 +5,23 @@ using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 namespace VRLabEssentials
 {
-
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(AudioSource))]
     public class Tool : XRGrabInteractable, IItem
     {
         [Header("Item")]
         [SerializeField] private ItemData data;
         [SerializeField] private bool canBeSliced;
-        [SerializeField] private GameObject thisObiectMesh;
+        [SerializeField] private GameObject thisObjectMesh;
+        [Header("Effects")]
+        [SerializeField] protected AudioClip pickSound;
+        [SerializeField] protected AudioClip useSound;
+        private AudioSource itemAudioSource;
         [Header("Events")]
         [SerializeField] protected UnityEvent OnToggle;
         [SerializeField] protected UnityEvent OnUnToggle;
         [SerializeField] protected UnityEvent InHand;
-
+        
         private Rigidbody rb;
 
         protected bool toggled = false;
@@ -25,10 +30,12 @@ namespace VRLabEssentials
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            itemAudioSource = GetComponent<AudioSource>();
         }
+
         private void Update()
         {
-            if (IsHolded())
+            if (IsHeld())
             {
                 InHand.Invoke();
             }
@@ -36,10 +43,13 @@ namespace VRLabEssentials
 
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
+            if(inHands == 0 && pickSound != null)
+            {
+                itemAudioSource.PlayOneShot(pickSound);
+            }
             inHands++;
 
             UpdateMassCenter();
-
 
             base.OnSelectEntered(args);
         }
@@ -58,8 +68,11 @@ namespace VRLabEssentials
             if (toggled) OnUnToggle.Invoke();
             else OnToggle.Invoke();
             toggled = !toggled;
+
+            if(useSound != null) itemAudioSource.PlayOneShot(useSound);
             base.OnActivated(args);
         }
+
         public ItemData GetItemData()
         {
             return data;
@@ -69,11 +82,13 @@ namespace VRLabEssentials
         {
             return this.gameObject;
         }
+
         public bool CanBeSliced()
         {
-            return canBeSliced && !IsHolded();
+            return canBeSliced && !IsHeld();
         }
-        public bool IsHolded()
+
+        public bool IsHeld()
         {
             return inHands > 0;
         }
@@ -91,7 +106,7 @@ namespace VRLabEssentials
         private void UpdateMassCenter()
         {
             if (rb == null) return;
-            if (IsHolded())
+            if (IsHeld())
             {
                 SetParentToXRRig();
                 rb.centerOfMass = Vector3.zero;
@@ -106,13 +121,13 @@ namespace VRLabEssentials
 
         public GameObject GetThisObjectMesh()
         {
-            if (thisObiectMesh == null) return ThisObject();
-            else return thisObiectMesh;
+            if (thisObjectMesh == null) return ThisObject();
+            else return thisObjectMesh;
         }
 
         public void SetThisObjectMesh(GameObject newMesh)
         {
-            thisObiectMesh = newMesh;
+            thisObjectMesh = newMesh;
         }
     }
 }
