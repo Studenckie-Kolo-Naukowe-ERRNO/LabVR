@@ -1,0 +1,34 @@
+1. Create 'Canvas' on the scene
+2. Put 'Tablet' prefab inside
+3. Put 'Page' inside 'Pages'
+4. enable ONLY first page
+5. Drag the added page inside gameobject 'Pages' to the list 'Pages'
+
+*How to add 'ready to use settings':
+1. Go to 'ReadyToDragSettings' folder inside 'Prefabs' folder
+2. Drag all the 3 prefabs inside 'Page' prefab on the scene
+3. Go to the first prefab u draged (for example 'ChangeGraphicsSettingsIcon Variant') 
+   and to OnClick Add the 'Page' that is a parent of the 
+   draged prefab (for example parent of 'ChangeGraphicsSettingsIcon Variant') 
+4. Select: 'OpenSettings' -> 'OpenTab' and place the selected 
+   prefab (for example 'ChangeGraphicsSettingsIcon Variant')
+5. Open the draged prefab (for example 'ChangeGraphicsSettingsIcon Variant') 
+6. Go to every child it has (Excluding gameobject called 'Description) and 
+   to OnClick Add 'Tablet' prefab and select the correct function (for example 'ChangeGraphicLevel').
+   Select this gameobject (for example 'GraphicBtn')
+
+	DO THE SAME TO ADD MORE 'READY TO USE SETTINGS'
+
+*How to add custom icons:
+1. Go to 'Prefabs' folder and drag 'icon' inside the 'Page' gameobject on 
+   the scene to the scene you want to add it to
+2. Add to the OnClick the 'Page' that is a parent of the draged icon 
+3. Select: 'OpenSettings' -> 'OpenTab' and place the selected 
+   prefab (for example 'Icon')
+4. Add any buttons or text u want the tab to contain as the 'icon' children, don't forget to disable them
+
+
+*How to add more pages:
+1. Drag a new 'Page' prefab to 'Pages' gameobject to the scene
+2. Add the page to the list of pages in the 'Pages' gameobject
+
