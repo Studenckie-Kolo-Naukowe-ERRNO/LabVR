@@ -15,11 +15,11 @@ MonoBehaviour:
   m_LayerNames:
   - Default
   - Hat
-  - 
-  - 
-  - 
-  - 
-  - 
+  - CPU
+  - RAM
+  - PCIE
+  - M2
+  - Motherboard
   - 
   - 
   - 
