@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
+
 namespace VRLabEssentials
 {
     [RequireComponent(typeof(CharacterController))]
