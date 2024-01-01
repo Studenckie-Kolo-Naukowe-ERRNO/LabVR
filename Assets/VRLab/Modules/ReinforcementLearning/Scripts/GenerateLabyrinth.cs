@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 // Environment
@@ -14,10 +15,38 @@ public class GenerateLabyrinth : MonoBehaviour {
     private Agent agent;
     private const int SCALE_MULTIPLIER = 1;
     [Range(0f, 1f)] public float speed;
+    [Space]
+    [SerializeField] private TextMeshProUGUI dataOutput;
+
 
     private void Start() {
         Generate();
         StartCoroutine(MoveTheCube());
+    }
+    public void ChangeLabyrinthSize(float nSize)
+    {
+        int size = (int)nSize;
+        if (size % 2 == 0) size += 1;
+        labyrinth = new int[size,size];
+        StopAllCoroutines();
+        Generate();
+        StartCoroutine(MoveTheCube());
+        UpdateOutput();
+    }
+    public void ChangeSimulationSpeed(float simSpeed)
+    {
+        speed = simSpeed;
+        UpdateOutput();
+    }
+
+    private void UpdateOutput()
+    {
+        dataOutput.text = "";
+        dataOutput.text += $"Generation: {agent.generation}\n";
+        dataOutput.text += $"Steps: {agent.steps}\n";
+        dataOutput.text += $"---\n";
+        dataOutput.text += $"Steps/s: {1/ speed}\n";
+        dataOutput.text += $"Maze size: {labyrinth.GetLength(0)}\n";
     }
 
     [ContextMenu("Generate new labyrinth")]
@@ -101,23 +130,27 @@ public class GenerateLabyrinth : MonoBehaviour {
                     obj.transform.localScale = Vector3.one * SCALE_MULTIPLIER;
                     obj.transform.localPosition = new Vector2(rows * SCALE_MULTIPLIER, -columns * SCALE_MULTIPLIER);
                 } else if (labyrinth[rows, columns] == 0) {
-                    GameObject obj = Instantiate(wayPrefab);
-                    obj.transform.SetParent(parent.transform, false);
-                    obj.transform.localScale = new Vector3(1, 1, 0.01f);
-                    obj.transform.localPosition = new Vector2(rows * SCALE_MULTIPLIER, -columns * SCALE_MULTIPLIER);
+                    //removed
                 } else if (labyrinth[rows, columns] == 3) {
                     GameObject obj = Instantiate(endPrefab);
                     obj.transform.SetParent(parent.transform, false);
                     obj.transform.localScale = Vector3.one * SCALE_MULTIPLIER;
                     obj.transform.localPosition = new Vector2(rows * SCALE_MULTIPLIER, -columns * SCALE_MULTIPLIER);
                 } else {
+                    /*
                     GameObject obj = Instantiate(startPrefab);
                     obj.transform.SetParent(parent.transform, false);
                     obj.transform.localScale = Vector3.one * SCALE_MULTIPLIER;
                     obj.transform.localPosition = new Vector2(rows * SCALE_MULTIPLIER, -columns * SCALE_MULTIPLIER);
+                    */
                 }
             }
         }
+
+        GameObject bg = Instantiate(wayPrefab);
+        bg.transform.SetParent(parent.transform, false);
+        bg.transform.localScale = new Vector3(labyrinth.GetLength(0), labyrinth.GetLength(1), 0.01f);
+        bg.transform.localPosition = new Vector2((int)(labyrinth.GetLength(0)/2), (int)(-labyrinth.GetLength(1)/2));
     }
 
     private bool IsInBounds(int rows, int columns) {
@@ -188,7 +221,7 @@ public class GenerateLabyrinth : MonoBehaviour {
             }
 
             playerGfx.transform.localPosition = new Vector2(agent.posX * SCALE_MULTIPLIER, agent.posY * -SCALE_MULTIPLIER);
-
+            UpdateOutput();
             yield return new WaitForSeconds(speed);
         }
     }

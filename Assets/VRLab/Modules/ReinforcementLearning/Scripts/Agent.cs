@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent : MonoBehaviour
+public class Agent
 {
     public State[,] states; // Get the labyrinth size
     public int posX;
@@ -11,6 +11,7 @@ public class Agent : MonoBehaviour
     private float a = 0.1f; // learning rate
     private float y = 0.9f; // discount factor
     public int steps = 0;
+    public int generation = 0;
 
     public Agent(int xSize, int ySize, int startX, int startY) {
         posX = startX;
@@ -22,7 +23,9 @@ public class Agent : MonoBehaviour
                 states[i, j] = new State();
             }
         }
-    }
+        steps = 0;
+        generation = 0;
+}
 
     public int MakeDecision() {
         steps++;
@@ -42,7 +45,7 @@ public class Agent : MonoBehaviour
         float maxQ = states[newX, newY].GetBestValue();
 
         if (reward == 100) {
-            Debug.Log($"steps it made {steps}");
+            generation++;
             steps = 0;
         }
 
