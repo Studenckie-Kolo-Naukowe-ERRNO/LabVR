@@ -16,6 +16,7 @@ public class Radio : MonoBehaviour {
             StartCoroutine(channel.PlayMusicCoroutine(audioSource));
             StartCoroutine(channel.CountSeconds());
         }
+        OnRadioStationChange();
     }
 
     [ContextMenu("Switch channel or Turn on the radio")]
