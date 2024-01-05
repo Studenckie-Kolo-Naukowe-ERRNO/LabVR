@@ -31,17 +31,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2cb01bfbe18379f4f8887d1e3b0237fc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.052
+      value: -0.2699
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2cb01bfbe18379f4f8887d1e3b0237fc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.932
+      value: 0.8789
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2cb01bfbe18379f4f8887d1e3b0237fc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.7
+      value: 2.6525
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2cb01bfbe18379f4f8887d1e3b0237fc,
         type: 3}
@@ -190,8 +190,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.027286286, y: 0.0071109533, z: 0.11353983}
-  m_Center: {x: -0.0000002514571, y: 0.003436625, z: -0.0012536868}
+  m_Size: {x: 0.025, y: 0.005, z: 0.1}
+  m_Center: {x: 0, y: 0.0035, z: -0.00125}
 --- !u!82 &5582191430081278470
 AudioSource:
   m_ObjectHideFlags: 0
