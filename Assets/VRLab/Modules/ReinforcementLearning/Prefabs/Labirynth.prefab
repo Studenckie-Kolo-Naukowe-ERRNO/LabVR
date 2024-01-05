@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3612589312336947354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9141329479888448968}
+  - component: {fileID: 467146352324409548}
+  m_Layer: 0
+  m_Name: Labirynth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9141329479888448968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612589312336947354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &467146352324409548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612589312336947354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757b75ca88441c04ebd69ae2faa6adb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 3950695973316335700, guid: dcec1ede941887a43a84ae370fcb6c24,
+    type: 3}
+  wayPrefab: {fileID: 6522886371385320154, guid: b08e6f78ddd8e544e9a75749a3869ffd,
+    type: 3}
+  endPrefab: {fileID: 6495888409037657990, guid: 893c4c60a9cc5be49a1d0c81d81d2cbd,
+    type: 3}
+  startPrefab: {fileID: 406965056434823882, guid: d956c3bff04eab0438ee8ad150958f51,
+    type: 3}
+  playerPrefab: {fileID: 3938357119002601195, guid: f8d222f15a72f43458b70f0798f6333a,
+    type: 3}
+  parent: {fileID: 3612589312336947354}
+  speed: 0
