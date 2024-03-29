@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78fcf97e4ac2255429ed54d8e7f8a473, type: 3}
+  m_Name: GTX 1060
+  m_EditorClassIdentifier: 
+  textureMappingUnit: 0
+  rasterUnits: 0
+  coreClock: 0
+  architecture: {fileID: 11400000, guid: 18145f836e8a2cd419074bdf3ccf62a6, type: 2}
+  connector: {fileID: 11400000, guid: 7af682ec7f583d14296fb1bc2049132d, type: 2}
+  GenPCIE: 0
+  PCIELanes: 0
+  memoryClock: 0
+  memoryBandwidth: 0
+  videoMemory: 0
+  memoryBus: 0
+  typeOfMemory: 0
+  genOfMemory: 
