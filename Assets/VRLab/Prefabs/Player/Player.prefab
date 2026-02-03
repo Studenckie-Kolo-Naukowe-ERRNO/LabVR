@@ -1999,7 +1999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &922865598991565826
 Transform:
   m_ObjectHideFlags: 0
@@ -5125,7 +5125,7 @@ MonoBehaviour:
   m_TrackingStateInput:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State Input
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 1de4e318-1fb0-4348-be93-f136d64f2b31
@@ -5215,6 +5215,7 @@ GameObject:
   - component: {fileID: 5455921673528144399}
   - component: {fileID: 1501571295186310288}
   - component: {fileID: 3515264374957397918}
+  - component: {fileID: 6169095866210206416}
   m_Layer: 6
   m_Name: XR Origin
   m_TagString: Player
@@ -5298,7 +5299,7 @@ MonoBehaviour:
   m_Camera: {fileID: 5455921673492821998}
   m_OriginBaseGameObject: {fileID: 5455921673528144395}
   m_CameraFloorOffsetObject: {fileID: 5455921673528822235}
-  m_RequestedTrackingOriginMode: 1
+  m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.1176
 --- !u!114 &5455921673528144392
 MonoBehaviour:
@@ -5478,6 +5479,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6169095866210206416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5455921673528144395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82bc72d2ecc8add47b2fe00d40318500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LeftHand: {fileID: 919132148791376471}
+  m_RightHand: {fileID: 919132148465316805}
+  m_LeftController: {fileID: 913390407893629961}
+  m_RightController: {fileID: 1090080584122529769}
+  m_TrackedHandModeStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  m_TrackedHandModeEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  m_MotionControllerModeStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  m_MotionControllerModeEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5455921673528822235
 GameObject:
   m_ObjectHideFlags: 0
